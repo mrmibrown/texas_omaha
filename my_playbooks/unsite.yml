@@ -1,5 +1,5 @@
 ---
-- name:  install and start apache
+- name:  initializing unsite
   hosts: webservers
   remote_user: ec2-user
   become: yes
@@ -11,7 +11,6 @@
       state: absent
 
   - name: Remove repository(and clean up left-over metadata)
-
     yum_repository:
       name: epel
       state: absent
