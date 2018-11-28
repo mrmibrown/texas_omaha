@@ -15,7 +15,7 @@
     - libsemanage-python
 
   - name: test to see if SeLinux is running
-    commnand: getenforce
+    command: getenforce
     register: sestatus
     change_when: false
 
@@ -23,4 +23,4 @@
     yum: name=httpd state=present
 
   - name: start apache
-  	service: name=httpd state=started enabled=yes
+    service: name=httpd state=started enabled=yes
