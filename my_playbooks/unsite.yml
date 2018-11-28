@@ -5,7 +5,7 @@
   become: yes
 
   tasks:
-  - name: Remove apache
+  - name: Remove apache and epel rpm
     yum:
       name: "{{ item.name }}"
       state: "{{ item.state }}"
@@ -13,7 +13,7 @@
       - { name: httpd, state: absent}
       - { name: epel-release-7-11.noarch, state: absent}
 
-  - name: Remove repository(and clean up left-over metadata)
+  - name: Remove repository reference(and clean up left-over metadata)
     yum_repository:
       name: epel
       state: absent
