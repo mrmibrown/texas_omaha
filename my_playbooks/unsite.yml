@@ -10,7 +10,7 @@
       name: "{{ item.name }}"
       state: "{{ item.state }}"
     loop:
-      - { name: "epel/x86_64", state: absent }
+      - { name: "epel", state: absent }
       - { name: httpd, state: absent }
     notify: yum-clean-metadata
 
