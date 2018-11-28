@@ -7,10 +7,11 @@
   tasks:
   - name: Remove apache
     yum:
-      name: httpd
-      state: absent
-      name: epel-release-7-11.noarch
-      state: absent
+      name: "{{ item.name }}"
+      state: "{{ item.state }}"
+    loop:
+      - { name: httpd, state: absent}
+      - { name: epel-release-7-11.noarch, state: absent}
 
   - name: Remove repository(and clean up left-over metadata)
     yum_repository:
