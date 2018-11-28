@@ -20,8 +20,7 @@
     change_when: false
 
   - name: install apache
-  	yum: name=httpd state=present
+    yum: name=httpd state=present
 
   - name: start apache
   	service: name=httpd state=started enabled=yes
-  	
