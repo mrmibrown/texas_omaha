@@ -10,8 +10,11 @@
       name: "{{ item.name }}"
       state: "{{ item.state }}"
     loop:
-      - { name: "epel", state: absent }
       - { name: httpd, state: absent }
+    yum_repository:
+      name: epel
+      state: absent
+
     notify: yum-clean-metadata
 
   - name: yum-clean-metadata
