@@ -5,11 +5,13 @@
   become: yes
 
   tasks:
-  - name: Remove repository and apache(and clean up left-over metadata)
+  - name: Remove apache
     yum:
       name: httpd
       state: absent
-      
+
+  - name: Remove repository(and clean up left-over metadata)
+
     yum_repository:
       name: epel
       state: absent
