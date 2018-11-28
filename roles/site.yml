@@ -7,13 +7,7 @@
   tasks:
   - name: install epel repo
     command: "yum install http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm"
-
-  - name: install python bindings for SELinux
-    yum: name={{item}} state=present
-    with_items:
-    - libselinux-python
-    - libsemanage-python
-
+    
   - name: test to see if SeLinux is running
     command: getenforce
     register: sestatus
