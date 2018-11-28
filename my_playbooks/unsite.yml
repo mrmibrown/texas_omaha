@@ -12,7 +12,6 @@
     loop:
       - { name: httpd, state: absent}
       - { name: epel-release, state: absent}
- #     - { name: epel-release-7-11.noarch, state: absent}
 
   - name: Remove repository reference(and clean up left-over metadata)
     yum_repository:
