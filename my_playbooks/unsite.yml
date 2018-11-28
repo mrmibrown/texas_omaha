@@ -7,10 +7,9 @@
   tasks:
   - name: Remove repository and apache(and clean up left-over metadata)
     yum:
-      name: "{{ item.name }}"
-      state: "{{ item.state }}"
-    loop:
-      - { name: httpd, state: absent }
+      name: httpd
+      state: absent
+      
     yum_repository:
       name: epel
       state: absent
