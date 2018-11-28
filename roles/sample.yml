@@ -1,0 +1,2 @@
+--- 
+- name: provision a single ec2 instance ec2: key_name: "{{ item.key }}" aws_access_key: "{{ ec2_access_key }}" aws_secret_key: "{{ ec2_secret_key }}" instance_type: "{{ item.type }}" count: "{{ ec2_count }}" volumes: - device_name: /dev/sda1 volume_size: 20 delete_on_termination: true image: "{{ item.image }}" wait: yes instance_tags: Name: Nightly-3.3 assign_public_ip: yes vpc_subnet_id: "{{ item.subnet }}" region: "{{ item.region }}" with_items: - { key: "{{ ec2_key }}", type: m3.large, image: "{{ ec2_ami }}", subnet: "subnet-9fcbe4d9", region: "us-west-2" }

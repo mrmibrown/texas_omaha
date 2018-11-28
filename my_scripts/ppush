@@ -1,0 +1,8 @@
+#!/bin/bash
+fullLABELa='export PS1="[\u@'
+fullLABELz=':\W]# "'
+echo "$fullLABELa$1$fullLABELz" >> /etc/profile
+echo "<--DONE-->"
+tail -1 /etc/profile
+clear
+su - root

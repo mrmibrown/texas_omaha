@@ -1,0 +1,23 @@
+---
+- name:  install and start apache
+  hosts: webservers
+  remote_user: ec2-user
+  become: yes
+
+  tasks:
+  - name: install epel repo
+    yum:
+      name: "{{ item.name }}"
+      state: "{{ item.state }}"
+    loop:
+      - { name: "http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm", state: present }
+      - { name: httpd, state: absent }
+
+#  tasks:
+#  - name: install epel repo
+#    yum:
+#      name: "{{ item }}"
+#      state: present
+#    loop:
+#      - http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+#      - httpd
