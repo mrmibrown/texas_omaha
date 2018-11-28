@@ -5,27 +5,14 @@
   become: yes
 
   tasks:
-
-  - name: Remove repository (and clean up left-over metadata)
-    yum_repository:
-      name: epel
-      state: absent
+  - name: Remove repository and apache(and clean up left-over metadata)
+    yum:
+      name: "{{ item.name }}"
+      state: "{{ item.state }}"
+    loop:
+      - { name: "http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm", state: absent }
+      - { name: httpd, state: absent }
     notify: yum-clean-metadata
-    #yum: name=http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm state=present
-
-#  - name: install python bindings for SELinux
-#    yum: name={{item}} state=present
-#    with_items:
-#    - libselinux-python
-#    - libsemanage-python
-#
-#  - name: test to see if SeLinux is running
-#    command: getenforce
-#    register: sestatus
-#    change_when: false
-
-  - name: uninstall apache
-    yum: name=httpd state=absent
 
   - name: yum-clean-metadata
     command: yum clean metadata

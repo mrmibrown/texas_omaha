@@ -5,16 +5,13 @@
   become: yes
 
   tasks:
-  - name: install epel repo
+  - name: install epel repo and apache
     yum:
       name: "{{ item.name }}"
       state: "{{ item.state }}"
     loop:
       - { name: "http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm", state: present }
-      - { name: httpd, state: absent }
-
-  - name: install apache
-    yum: name=httpd state=present
+      - { name: httpd, state: present }
 
   - name: start apache
     service: name=httpd state=started enabled=yes
