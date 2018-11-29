@@ -10,6 +10,7 @@
     daemonname: myapplb
     listenport: 8888
     balance: roundrobin
+    httpd_port: 80
 
   roles:
   - haproxy
