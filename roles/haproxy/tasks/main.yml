@@ -6,7 +6,7 @@
 
 - name: Configure the haproxy cnf file with hosts
   template: src=haproxy.cfg.j2 dest=/etc/haproxy/haproxy.cfg
-  file: name=/etc/haproxy/haproxy.cfg mode=0755
+    file: name=/etc/haproxy/haproxy.cfg mode=0755
   notify: restart haproxy
 
 - name: Start the haproxy service
