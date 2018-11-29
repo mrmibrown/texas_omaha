@@ -1,7 +1,7 @@
 [webservers]
 ip-172-31-46-61.us-east-2.compute.internal
 
-[lbserver]
+[lbservers]
 172.31.39.120
 
 [all:vars]

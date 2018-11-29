@@ -1,6 +1,6 @@
 ---
 - name: apply the lb configuration
-  hosts: lbserver
+  hosts: lbservers
   remote_user: ec2-user
   become: yes
 
