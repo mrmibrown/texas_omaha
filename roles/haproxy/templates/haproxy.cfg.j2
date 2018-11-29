@@ -31,9 +31,9 @@ defaults
 
 backend app
     {% for host in groups['lbservers'] %}
-        listen {{ daemonname }} {{ eth0.ipv4.address }}:{{ listenport }}
+        listen {{ daemonname }} {{ hostvars[host]['ansible_' + eth0].ipv4.address }}:{{ listenport }}
     {% endfor %}
     balance     {{ balance }}
     {% for host in groups['webservers'] %}
-        server {{ host }} {{ eth0.ipv4.address }}:{{ httpd_port }}
+        server {{ host }} {{ hostvars[host]['ansible_' + eth0].ipv4.address }}:{{ httpd_port }}
     {% endfor %}
