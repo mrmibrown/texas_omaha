@@ -1,6 +1,10 @@
 [webservers]
 ip-172-31-46-61.us-east-2.compute.internal
 
+[lbservers]
+ip-172-31-39-120.us-east-2.compute.internal
+ip-172-31-42-223.us-east-2.compute.internal
+
 [all:vars]
 ansible_user='ec2-user'
 ansible_become=true

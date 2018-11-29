@@ -1,17 +1,33 @@
 ---
-- name:  initializing site
+- name: apply the common configuration to all hosts
+  hosts: all
+  remote_user: ec2-user
+  become: yes
+
+  roles:
+  - common
+
+- name: apply the database configuration
+  hosts: dbservers
+  remote_user: ec2-user
+  become: yes
+
+  roles:
+  - mariadb
+
+- name: apply the apache and the web roles
   hosts: webservers
   remote_user: ec2-user
   become: yes
 
-  tasks:
-  - name: install epel repo and apache
-    yum:
-      name: "{{ item.name }}"
-      state: "{{ item.state }}"
-    loop:
-      - { name: "http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm", state: present }
-      - { name: httpd, state: present }
+  roles:
+  - apache
+  - web
 
-  - name: start apache
-    service: name=httpd state=started enabled=yes
+- name: apply the lb configuration
+  hosts: lbservers
+  remote_user: ec2-user
+  become: yes
+
+  roles:
+  - haproxy 
