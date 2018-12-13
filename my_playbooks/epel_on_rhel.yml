@@ -1,17 +1,17 @@
 ---
-- name:  install and start apache
+- name:  install epel and apache on RHEL
   hosts: webservers
   remote_user: ec2-user
   become: yes
 
   tasks:
-  - name: install epel repo
+  - name: install loop, epel and apache
     yum:
       name: "{{ item.name }}"
       state: "{{ item.state }}"
     loop:
       - { name: "http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm", state: present }
-      - { name: httpd, state: absent }
+      - { name: httpd, state: present }
 
 #  tasks:
 #  - name: install epel repo
