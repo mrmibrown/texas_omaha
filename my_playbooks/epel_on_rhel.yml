@@ -1,6 +1,6 @@
 ---
-- name:  install epel and apache on RHEL
-  hosts: webservers
+- name:  initializing site
+  hosts: all
   remote_user: ec2-user
   become: yes
 
