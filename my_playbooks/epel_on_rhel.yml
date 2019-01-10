@@ -13,11 +13,8 @@
       - { name: "http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm", state: present }
       - { name: httpd, state: present }
 
-#  tasks:
-#  - name: install epel repo
-#    yum:
-#      name: "{{ item }}"
-#      state: present
-#    loop:
-#      - http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-#      - httpd
+#  - name: starting apache
+#    service:
+#      name: httpd
+#      enabled: yes
+#      state: started
