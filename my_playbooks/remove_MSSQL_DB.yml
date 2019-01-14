@@ -1,0 +1,12 @@
+---
+- name:  initializing site
+  hosts: all
+  remote_user: miket
+  #become: yes
+
+  tasks:
+  - name: Adding sample MSSQL database
+  # Remove new database with name 'mb_sampleDB_mb'
+  - mssql_db:
+      name: mb_sampleDB_mb
+      state: absent

@@ -1,0 +1,22 @@
+---
+- name:  initializing site
+  hosts: all
+  remote_user: miket
+  #become: yes
+
+  tasks:
+  - name: Adding sample MSSQL database
+  # Create a new database with name 'mb_sampleDB_mb'
+  - mssql_db:
+      name: mb_sampleDB_mb
+      state: present
+  
+  # Copy database dump file to remote host and restore it to database 'mb_sampleDB_mb'
+  - copy:
+      src: sample_db_mb.sql
+      dest: /tmp
+  
+  - mssql_db:
+      name: mb_sampleDB_mb
+      state: import
+      target: /tmp/dump.sql
