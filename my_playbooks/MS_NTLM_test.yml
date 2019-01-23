@@ -1,0 +1,4 @@
+ansible_user: miket
+ansible_password: kjkiuiKJK88
+ansible_connection: winrm
+ansible_winrm_transport: ntlm
