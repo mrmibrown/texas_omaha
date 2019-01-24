@@ -3,12 +3,12 @@
   hosts: winbox
 
   tasks:
-  - name: Install git
+  - name: UNInstall git
     win_chocolatey:
       name: git
       state: absent
 
-  - name: Install notepadplusplus
+  - name: UNInstall notepadplusplus
     win_chocolatey:
       name: notepadplusplus
       state: absent
