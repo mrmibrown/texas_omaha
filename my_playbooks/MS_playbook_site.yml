@@ -1,0 +1,19 @@
+---
+- name:  initializing windows site
+  hosts: winbox
+
+  tasks:
+  - name: Install git
+    win_chocolatey:
+      name: git
+      state: present
+
+  - name: Install notepadplusplus
+    win_chocolatey:
+      name: notepadplusplus
+      state: present
+
+  - name: Copy a single file
+    win_copy:
+      src: ~/mb_MS_FILE_COPY_test.conf
+      dest: C:\Temp\renamed-foo-mb.conf

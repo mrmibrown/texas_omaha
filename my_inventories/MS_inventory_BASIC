@@ -1,0 +1,9 @@
+[winbox]
+ip-172-31-43-99.us-east-2.compute.internal
+
+[all:vars]
+ansible_user=miket
+ansible_password=kjkiuiKJK88
+ansible_connection=winrm
+ansible_winrm_transport=basic
+ansible_winrm_server_cert_validation=ignore
