@@ -12,3 +12,13 @@
     win_chocolatey:
       name: notepadplusplus
       state: absent
+
+  - name: Ensure user bob is absent
+    win_user:
+      name: bob
+      state: absent
+
+  - name: Remove a group
+    win_group:
+      name: mbtestgrp
+      state: absent
