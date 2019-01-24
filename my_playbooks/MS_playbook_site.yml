@@ -16,4 +16,11 @@
   - name: Copy a single file
     win_copy:
       src: ~/mb_MS_FILE_COPY_test.conf
-      dest: C:\Temp\renamed-foo-mb.conf
+      dest: C:\Windows\Temp\renamed-foo-mb-conf.txt
+
+  - name: Edit a single file
+  # Add a line to a file and ensure the resulting file uses unix line separators
+  - win_lineinfile:
+      path: C:\Windows\Temp\renamed-foo-mb-conf.txt
+      line: Got pigeon milk!?
+      newline: unix
