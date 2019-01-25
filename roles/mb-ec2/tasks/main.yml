@@ -14,7 +14,7 @@
     group_id: sg-0adc4239a89c15b98
     wait: yes
     instance_tags:
-        Name: playbookGen-mb-micro
+        Name: MB-playbookGen-mb-micro
     assign_public_ip: yes
     vpc_subnet_id: "{{ item.subnet }}"
     region: "{{ item.region }}"
