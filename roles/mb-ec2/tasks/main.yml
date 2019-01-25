@@ -1,0 +1,40 @@
+---
+- name: provision a single ec2 instance
+  ec2:
+    key_name: "{{ item.key }}"
+    aws_access_key: "{{ ec2_access_key }}"
+    aws_secret_key: "{{ ec2_secret_key }}"
+    instance_type: "{{ item.type }}"
+    count: "{{ ec2_count }}"
+    volumes:
+      - device_name: /dev/sda1
+        volume_size: 20
+        delete_on_termination: true
+    image: "{{ item.image }}"
+    group_id: sg-0adc4239a89c15b98
+    wait: yes
+    instance_tags:
+        Name: playbookGen-mb-micro
+    assign_public_ip: yes
+    vpc_subnet_id: "{{ item.subnet }}"
+    region: "{{ item.region }}"
+  with_items:
+   - { key: "{{ ec2_key }}", type: t2.micro, image: "{{ ec2_ami }}", subnet: "subnet-0b724551043b3e365", region: "us-east-2c" }
+  register: ec2
+- set_fact:
+   public_dns: 
+     - "{{ ec2.results[0].instances | map(attribute='public_dns_name') | list }}"
+- name: Add the primary into inventory
+  add_host:
+    name: "{{ item }}"
+    groups: pbgen
+    ansible_user: ec2-user
+  with_items: "{{ public_dns }}"
+- name: wait for port 22
+  wait_for:
+    port: 22
+    host: "{{ item }}"
+  with_items: "{{ public_dns }}"
+
+
+

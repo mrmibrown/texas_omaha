@@ -1,0 +1,9 @@
+---
+- name: Launching ec2 instance(s)
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  become: yes
+
+  roles:
+    - mb-ec2

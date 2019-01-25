@@ -1,0 +1,29 @@
+[tower]
+"{{ public_dns[0] }}" ansible_connection=local ansible_ssh_private_key_file=/root/.ssh/gabemuniz_east.pem
+[isolated_group_banana_cognac]
+"{{ public_dns[1] }}" ansible_ssh_private_key_file=/root/.ssh/gabemuniz_east.pem controller=tower
+#[isolated_group_dog_feces]
+#ec2-54-179-162-148.ap-southeast-1.compute.amazonaws.com ansible_ssh_private_key_file=/root/.ssh/gabemuniz_singapore.pem controller=tower
+
+[database]
+
+[all:vars]
+admin_password='password'
+ansible_user=ec2-user
+ansible_become=yes
+pg_host='awx.c9ntgaejgqln.us-west-2.rds.amazonaws.com'
+pg_port='5432'
+
+pg_database='awx'
+pg_username='awx'
+pg_password='password'
+
+rabbitmq_port=5672
+rabbitmq_vhost=tower
+rabbitmq_username=tower
+rabbitmq_password='password'
+rabbitmq_cookie=cookiemonster
+
+# Needs to be true for fqdns and ip addresses
+rabbitmq_use_long_name=true
+

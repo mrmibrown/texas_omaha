@@ -1,0 +1,5 @@
+---
+# defaults file for ec2
+ec2_ami: ami-0b500ef59d8335eee
+ec2_key: mbrown
+ec2_count: 1
