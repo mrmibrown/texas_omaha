@@ -1,0 +1,7 @@
+---
+# defaults file for vc
+vcenter_hostname: 172.17.0.2
+vcenter_username: vc_username
+vcenter_password: vc_password
+
+esxi_hostname: my_playbook_deployed_host
