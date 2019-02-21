@@ -1,7 +1,7 @@
 ---
 - name: Create a virtual machine on given ESXi hostname
   vmware_guest:
-    hostname: "{{ vcenter_hostname }}"
+    hostname: "{{ vc_hostname }}"
     username: "{{ vc_username }}"
     password: "{{ vc_password }}"
     datacenter: "{{ vc_datacenter }}"
