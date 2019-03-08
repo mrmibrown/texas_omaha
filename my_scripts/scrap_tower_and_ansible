@@ -1,0 +1,63 @@
+#!/bin/bash
+clear
+echo -e "\n******************************"
+echo -e "Checking Tower Installation..."
+if [ -f /bin/ansible-tower-service ]
+then
+echo -e "\tTower Installation: FOUND\n"
+echo "Tower_version: `awx-manage --version`"
+echo -e "Would you like remove this TOWER installation?: Y/N"
+read RMCONF
+
+   if [[ "$RMCONF" = "y" || "$RMCONF" = "Y" ]];
+   then
+   ansible-tower-service stop
+   yum -y remove ansible-tower\*
+   yum -y remove rabbitmq-server
+   rm -rf /etc/tower /var/lib/{pgsql,awx,rabbitmq}
+   echo -e "\n\n\n"
+   fi
+
+else
+echo -e "\tTower Installation: NOT DETECTED\n"
+fi
+
+
+echo -e "\n********************************"
+echo -e "Checking Ansible Installation..."
+if [ -f /bin/ansible ]
+then
+echo -e "\tAnsible Installation: FOUND\n"
+   echo -e "Remaining RPMs..."
+   rpm -qa | grep ansible
+   echo -e "\nRemaining YUM Packages..."
+   yum list installed|grep -i ansible
+   echo -e "\n\n\n"
+ansible --version|grep ^ansible
+echo -e "Would you like remove this ANSIBLE installation?: Y/N"
+read RMCONF2
+
+   if [[ "$RMCONF2" = "y" || "$RMCONF2" = "Y" ]];
+   then
+   yum -y remove ansible\*
+   #rm -rf /etc/ansible
+   echo -e "\n\n\n"
+   echo -e "\tConfirming Tower Removal...\n"
+   echo -e "Remaining TOWER RPMs..."
+   rpm -qa | grep ansible-tower
+   echo -e "\nRemaining YUM Packages...\n\n"
+   yum list installed|grep -i ansible
+   echo -e "\nRemaining RABBITMQ Packages...\n\n"
+   yum list installed|grep -i rabbit
+   echo -e "\tConfirming ANSIBLE ENGINE Removal...\n"
+   echo -e "Remaining Ansible Engine RPMs..."
+   rpm -qa | grep ansible
+   echo -e "\nRemaining YUM Packages..."
+   yum list installed|grep -i ansible
+   echo -e "\n\n\n"
+   fi
+else
+echo -e "\tAnsible Installation: NOT DETECTED\n"
+fi
+
+#Need to verify if this is needed: rm -f /var/lib/pgsql and postgre rpm -e
