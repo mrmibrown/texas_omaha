@@ -15,6 +15,13 @@ read RMCONF
    yum -y remove ansible-tower\*
    yum -y remove rabbitmq-server
    rm -rf /etc/tower /var/lib/{pgsql,awx,rabbitmq}
+   rm -rf /var/log/supervisor
+      if [ -f /var/cache/yum/ ]
+      then
+              echo -e "\n\nClearing YUM CACHE....."
+              rm -rf /var/cache/yum
+              yum clean all
+      fi
    echo -e "\n\n\n"
    fi
 
@@ -55,9 +62,17 @@ read RMCONF2
    echo -e "\nRemaining YUM Packages..."
    yum list installed|grep -i ansible
    echo -e "\n\n\n"
+      if [ -f /var/cache/yum/ ]
+      then
+              echo -e "\n\nClearing YUM CACHE....."
+              rm -rf /var/cache/yum
+              yum clean all
+      fi
    fi
 else
 echo -e "\tAnsible Installation: NOT DETECTED\n"
 fi
+
+
 
 #Need to verify if this is needed: rm -f /var/lib/pgsql and postgre rpm -e
