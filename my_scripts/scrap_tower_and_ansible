@@ -16,6 +16,7 @@ read RMCONF
    yum -y remove rabbitmq-server
    rm -rf /etc/tower /var/lib/{pgsql,awx,rabbitmq}
    rm -rf /var/log/supervisor
+   rm -rf /var/run/supervisor
       if [ -f /var/cache/yum/ ]
       then
               echo -e "\n\nClearing YUM CACHE....."
