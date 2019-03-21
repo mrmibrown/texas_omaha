@@ -24,6 +24,11 @@ read RMCONF
               yum clean all
       fi
    echo -e "\n\n\n"
+   mkdir /var/log/{supervisor,nginx}
+   chmod 770 /var/log/supervisor
+   chmod 700 /var/log/nginx
+   chown root:root /var/log/supervisor
+   chown nginx:nginx /var/log/nginx
    fi
 
 else
