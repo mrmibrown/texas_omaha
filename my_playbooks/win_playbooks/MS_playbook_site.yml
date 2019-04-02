@@ -28,7 +28,7 @@
   - name: Ensure user bob is present
     win_user:
       name: bob
-      password: kjkiuiKJK88
+      password: REDACT
       state: present
       groups:
         - Users
