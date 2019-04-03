@@ -26,4 +26,5 @@
           "enabled": true,
           "instance_id": "",
           "variables": ""
+      body_format: json
     register: this
