@@ -21,4 +21,5 @@
       body: {"name":"44.3.2.1","description":"My box added via uri module","inventory":3,"enabled":"true"}
       body_format: json
       validate_certs: no
+      status_code: 201
     register: this
