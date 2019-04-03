@@ -14,8 +14,8 @@
       method: POST
       headers:
         Content-Type: "application/json"
-      user: admin
-      password: kjkiuiKJK88
+      user: "admin"
+      password: "kjkiuiKJK88"
       return_content: yes
       body: {"name":"44.3.2.1","description":"My box added via uri module","inventory":"3","enabled":"true"}
 #        mainlevel:
