@@ -27,4 +27,5 @@
 #          "variables": ""
       body_format: json
       status_code: 201
+      validate_certs: no
     register: this
