@@ -1,0 +1,28 @@
+---
+- name: install and start apache and tree
+  hosts: all
+  remote_user: ec2-user
+  become: yes
+
+  tasks:
+  - name: install apache
+    yum: name=httpd state=present
+
+  - name: Adding host to Inventory
+      uri:
+        url: http://ec2-18-188-218-181.us-east-2.compute.amazonaws.com/api/v2/hosts/
+        method: POST
+        HEADER_Content-Type="application/json"
+        user: admin
+        password: kjkiuiKJK88
+        return_content: yes
+        body_format: raw
+        body: {
+          "name": "4.3.2.1",
+          "description": "My box added via uri module",
+          "inventory": 3,
+          "enabled": true,
+          "instance_id": "",
+          "variables": ""
+          }
+      register: this
