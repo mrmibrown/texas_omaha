@@ -12,7 +12,7 @@
     uri:
       url: http://ec2-18-188-218-181.us-east-2.compute.amazonaws.com/api/v2/hosts/
       method: POST
-      HEADER_Content-Type="application/json"
+      HEADER_Content-Type: "application/json"
       user: admin
       password: kjkiuiKJK88
       return_content: yes
