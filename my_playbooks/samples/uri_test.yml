@@ -17,7 +17,7 @@
       user: admin
       password: kjkiuiKJK88
       return_content: yes
-      body: "{{ 'name': '44.3.2.1', 'description': 'My box added via uri module', 'inventory': '3', 'enabled': 'true' }}"
+      body: {"name":"44.3.2.1","description":"My box added via uri module","inventory":"3","enabled":"true"}
 #        mainlevel:
 #          "name": "4.3.2.1",
 #          "description": "My box added via uri module",
@@ -26,4 +26,5 @@
 #          "instance_id": "",
 #          "variables": ""
       body_format: json
+      status_code: 201
     register: this
