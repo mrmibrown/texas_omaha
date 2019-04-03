@@ -18,7 +18,7 @@
       password: kjkiuiKJK88
       return_content: yes
       body_format: raw
-      body: "{{ lookup('name','44.3.2.1'), lookup('description','My box added via uri module'), lookup('inventory','3'), lookup('enabled','true') }}"
+      body: "{{ 'name': '44.3.2.1', 'description': 'My box added via uri module', 'inventory': '3', 'enabled': 'true' }}"
 #        mainlevel:
 #          "name": "4.3.2.1",
 #          "description": "My box added via uri module",
