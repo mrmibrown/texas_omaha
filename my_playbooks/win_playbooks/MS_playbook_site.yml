@@ -28,7 +28,7 @@
   - name: Ensure user bob is present
     win_user:
       name: bob
-      password: {{ test_user_password }}
+      password: "{{ test_user_password }}"
       state: present
       groups:
         - Users
