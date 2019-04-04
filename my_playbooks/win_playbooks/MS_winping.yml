@@ -1,23 +1,7 @@
 ---
 - name:  initializing windows site
   hosts: all
-  ansible_connection: winrm
-  ansible_password: kjkiuiKJK88
-  ansible_user: miket
-  ansible_winrm_server_cert_validation: ignore
-  ansible_winrm_transport: basic
-
 
   tasks:
   - name: Win Ping
     win_ping:
-
-  - name: Install git
-    win_chocolatey:
-      name: git
-      state: present
-
-  - name: Install notepadplusplus
-    win_chocolatey:
-      name: notepadplusplus
-      state: present
