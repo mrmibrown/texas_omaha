@@ -1,0 +1,6 @@
+ansible_connection: winrm
+ansible_password: REDACT
+ansible_user: Administrator
+ansible_winrm_server_cert_validation: ignore
+ansible_winrm_transport: basic
+test_user_password: REDACT
