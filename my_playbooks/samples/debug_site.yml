@@ -16,6 +16,10 @@
     debug:
       var: got_milk.stdout
 
+  - name: Debug with var parameter.stdout
+    debug:
+      var: got_milk.stdout
+
   - name: Debug with msg parameter
     debug:
       msg: "Testing msg debug --> {{ got_milk }}"
