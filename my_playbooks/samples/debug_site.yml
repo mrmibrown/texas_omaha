@@ -1,17 +1,18 @@
 ---
-- name: install and start apache and tree
+- name: Testing Debug Parameters
   hosts: all
   remote_user: ec2-user
   become: yes
 
   tasks:
-  - name: install apache
-    yum: name=httpd state=present
-
-  - name: install tree
-    yum: name=tree state=present
-
-  - name: start apache
-    service: name=httpd state=started enabled=yes
+  - name: Test echo
+    shell: echo "Hello world"
+    register: got_milk
 
   - debug: var=got_milk
+
+  - debug:
+      var: got_milk.stdout
+
+  - debug:
+      msg: "Testing msg debug --> {{ got_milk }}"
