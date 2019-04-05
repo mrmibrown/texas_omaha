@@ -14,7 +14,7 @@
 
   - name: Debug with var parameter
     debug:
-      var: got_milk.stdout
+      var: got_milk
 
   - name: Debug with var parameter.stdout
     debug:
