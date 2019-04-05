@@ -9,10 +9,13 @@
     shell: echo "Hello world"
     register: got_milk
 
-  - debug: var=got_milk
+  - name: Debug with var equals
+    debug: var=got_milk
 
-  - debug:
+  - name: Debug with var parameter
+    debug:
       var: got_milk.stdout
 
-  - debug:
+  - name: Debug with msg parameter
+    debug:
       msg: "Testing msg debug --> {{ got_milk }}"
