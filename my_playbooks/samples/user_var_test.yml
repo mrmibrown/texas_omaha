@@ -1,0 +1,19 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+  - name: sanity check on my variable
+    debug:
+      msg: "{{ foo }}"
+  - name: find tower variables
+    debug:
+      msg: "{{ item }}"
+    loop:
+      - "{{ tower_job_id }}"
+      - "{{tower_job_launch_type}}"
+      - "{{tower_job_template_id}}"
+      - "{{tower_job_template_name}}"
+      - "{{tower_user_id}}"
+      - "{{tower_user_name}}"
+      - "{{tower_user_email}}"

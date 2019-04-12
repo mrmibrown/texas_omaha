@@ -1,0 +1,8 @@
+Setting the iam_role variable as a source variable in the inventory source page within Tower:
+---
+iam_role: "arn:aws:iam::12334566543:role/Mgmt_account_accesing_IOS_sandbox_for_EC2"
+regions: us-east-1
+all_instances: true
+
+
+

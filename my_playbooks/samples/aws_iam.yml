@@ -1,0 +1,7 @@
+- name: get authentication tokens for specific account
+  sts_assume_role:
+    role_arn: "{{ account.value.role_arn }}" #arn:aws:iam::1233445666433:role/Mgmt_account_accesing_IOS_sandbox_for_EC2
+    role_session_name: create_encrypted_AMI
+    region: "{{ region }}"
+  register: auth_token
+  no_log: true

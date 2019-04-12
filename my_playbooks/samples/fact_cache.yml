@@ -1,0 +1,14 @@
+---
+- name: install and start apache and tree
+  hosts: all
+  remote_user: ec2-user
+  become: yes
+
+  tasks:
+  - name: install apache
+    yum: name=httpd state=present
+
+#Fact caching should be enabled in the job template as well
+  - set_fact:
+      mygroupname: groupA
+      cacheable: true

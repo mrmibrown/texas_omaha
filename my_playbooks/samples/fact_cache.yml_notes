@@ -1,0 +1,13 @@
+#custom facts format on remote host:
+file: /etc/ansible/facts.d/myfacts.fact
+myfacts.fact:
+~~~
+[general]
+mygroup=a
+mycustomfact=2
+~~~
+
+smart_inv_reference:
+~~~
+ansible_facts.ansible_local.myfacts.general.mygroup:a
+~~~
