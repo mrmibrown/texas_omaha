@@ -2,7 +2,7 @@
 - name: COMMAND Sample
   hosts: all
   remote_user: ec2-user
-  become: yes
+  connection: local
 
   tasks:
 
