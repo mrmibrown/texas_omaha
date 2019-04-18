@@ -6,13 +6,13 @@
 
   tasks:
 
-- name: Register git version with COMMAND
-  command: /bin/git --version
-  register: mygitversion
-
-- name: Debug check git version
-    debug:
-      var: mygitversion.stdout
+  - name: Register git version with COMMAND
+    command: /bin/git --version
+    register: mygitversion
+  
+  - name: Debug check git version
+      debug:
+        var: mygitversion.stdout
 
 #- name: Run the command if the specified file does not exist.
 #  command: /usr/bin/make_database.sh arg1 arg2
