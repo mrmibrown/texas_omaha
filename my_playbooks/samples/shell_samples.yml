@@ -11,8 +11,8 @@
     register: mygitversion
   
   - name: Debug check git version
-      debug:
-        var: mygitversion.stdout
+    debug:
+      var: mygitversion.stdout
 
 #- name: Execute the command in remote shell; stdout goes to the specified file on the remote.
 #  shell: somescript.sh >> somelog.txt
