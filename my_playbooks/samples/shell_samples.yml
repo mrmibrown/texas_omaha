@@ -1,4 +1,11 @@
 ---
+- name: SHELL sample
+  hosts: all
+  remote_user: ec2-user
+  become: yes
+
+  tasks:
+
 - name: Register git version with SHELL
   shell: /bin/git --version
   register: mygitversion

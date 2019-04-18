@@ -1,4 +1,11 @@
 ---
+- name: COMMAND Sample
+  hosts: all
+  remote_user: ec2-user
+  become: yes
+
+  tasks:
+
 - name: Register git version with COMMAND
   command: /bin/git --version
   register: mygitversion
