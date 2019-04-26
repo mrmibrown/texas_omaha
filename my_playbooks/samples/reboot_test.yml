@@ -1,0 +1,24 @@
+---
+- name: install and start apache and tree
+  hosts: all
+  remote_user: ec2-user
+  become: yes
+
+  tasks:
+  - debug:
+      msg: "The current time is {{ ansible_date_time.time }}"
+
+  - name: Reboot system
+    reboot:
+      post_reboot_delay: 120
+    register: rb_status
+
+  - name: Refresh facts
+    setup:
+
+  - debug:
+      msg: "The current time is {{ ansible_date_time.time }}"
+
+  - debug:
+       msg: Reboot took {{ rb_status.elapsed }} seconds
+    when: rb_status.changed
