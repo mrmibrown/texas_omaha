@@ -1,5 +1,5 @@
 ---
-- name: install and start apache and tree
+- name: Reboot Diagnostics Test...In Progress
   hosts: all
   remote_user: ec2-user
   become: yes
