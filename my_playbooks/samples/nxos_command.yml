@@ -1,0 +1,72 @@
+---
+- name: NXOS_command test playbook
+  hosts: all
+  remote_user: ec2-user
+  become: yes
+
+  tasks:
+#Example 1 :
+# IP ACL rule check and validation ---BEGIN----
+# ------------------------------------------------------------------------------------
+
+     - name: Checking IP ACL for mgmt network
+
+       vars:
+
+         ansible_command_timeout: 60
+
+       nxos_command:
+
+         commands: show running-config interface mgmt 0 |inc access-group
+
+       register: IPACL_MGMT0
+
+
+
+
+#Example 2:
+# Checking SSH feature
+ # ------------------------------------------------------------------------------------
+
+     - name: Checking feature SSH
+
+       nxos_command:
+
+         commands: show running-config all |inc 'feature ssh' |exc 'rule'
+
+       register: FEATURE_SSH
+
+       vars:
+
+         ansible_command_timeout: 60
+
+     - set_fact:
+
+         expected_FEATURE_SSH: "{{ FEATURE_SSH_I | regex_replace('\n', '') | regex_replace(' ', '') }}"
+
+         output_FEATURE_SSH: "{{ FEATURE_SSH.stdout[0] | regex_replace(' ', '') | regex_replace('\n', '') | regex_replace('\r', '') | default('NOT_FOUND') }}"
+
+       ignore_errors: True
+
+
+
+#Example 3:
+# ------------------------------------------------------------------------------------
+
+     - name: Checking feature TELNET IS PRESENT
+
+       nxos_command:
+
+         timeout: 30 
+
+         commands: show running-config all |inc 'feature telnet' |exc 'rule'
+
+       register: FEATURE_TELNET
+
+     - set_fact:
+
+         expected_FEATURE_TELNET: "{{ FEATURE_TELNET_I | regex_replace('\n', '') | regex_replace(' ', '') }}"
+
+         output_FEATURE_TELNET: "{{ FEATURE_TELNET.stdout[0] | regex_replace(' ', '') | regex_replace('\n', '') | regex_replace('\r', '') | default('NOT_FOUND') }}"
+
+       ignore_errors: True
