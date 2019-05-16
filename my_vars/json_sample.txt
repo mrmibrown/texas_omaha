@@ -1,0 +1,38 @@
+"meraki_network.data": [
+        {
+            "claimedAt": "1432833922.93661", 
+            "mac": "00:18:0a:7a:3f:ed", 
+            "model": "MR18", 
+            "name": "", 
+            "networkId": "L_655273745782417164", 
+            "publicIp": null, 
+            "serial": "Q2GD-SRX8-L3P3"
+        }, 
+        {
+            "claimedAt": "1522540192.80065", 
+            "mac": "0c:8d:db:fd:94:c5", 
+            "model": "MS250-48LP", 
+            "name": "lax-stakm002", 
+            "networkId": "L_655273745782411517", 
+            "publicIp": "199.27.69.254", 
+            "serial": "Q2PW-6MCW-GPCR"
+        }, 
+        {
+            "claimedAt": "1522540192.83405", 
+            "mac": "0c:8d:db:fd:b3:65", 
+            "model": "MS250-48LP", 
+            "name": "lax-stakm004", 
+            "networkId": "L_655273745782411517", 
+            "publicIp": "199.27.69.254", 
+            "serial": "Q2PW-8KAF-JKS6"
+        }, 
+        {
+            "claimedAt": "1522540192.84367", 
+            "mac": "0c:8d:db:fd:b4:45", 
+            "model": "MS250-48LP", 
+            "name": "lax-stakm003", 
+            "networkId": "L_655273745782411517", 
+            "publicIp": "199.27.69.254", 
+            "serial": "Q2PW-8KHP-3GPL"
+        }
+]
