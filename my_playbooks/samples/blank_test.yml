@@ -5,7 +5,7 @@
   become: yes
   gather_facts: no
   vars_files:
-    - /var/lib/awx/projects/_6__my_git/my_playbooks/samples/myvars.yml
+    - ../../my_vars/json_sample.txt
 
   tasks:
 
