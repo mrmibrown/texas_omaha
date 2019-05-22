@@ -9,5 +9,5 @@
 
     - name: Copy file
       copy:
-        src: /usr/share/awx/request_tower_configuration.ps1
-        dest: C:\Windows\Temp\request_tower_configuration.ps1
+        src: /srv/myfiles/foo.conf
+        dest: /etc/foo.conf
