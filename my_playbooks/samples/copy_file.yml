@@ -1,0 +1,13 @@
+---
+- name: Sample File Copy Playbook
+  hosts: all
+  remote_user: ec2-user
+  become: yes
+  gather_facts: no
+
+  task:
+
+    - name: Copy file
+      copy:
+        src: /usr/share/awx/request_tower_configuration.ps1
+        dest: C:\Windows\Temp\request_tower_configuration.ps1
