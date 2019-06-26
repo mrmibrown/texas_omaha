@@ -1,0 +1,19 @@
+---
+- name: Your blank test template
+  hosts: all
+  remote_user: ec2-user
+  become: yes
+  gather_facts: no
+
+  tasks:
+  - name: find tower variables
+    debug:
+      msg: "{{ item }}"
+    loop:
+      - "{{ tower_job_id }}"
+      - "{{tower_job_launch_type}}"
+      - "{{tower_job_template_id}}"
+      - "{{tower_job_template_name}}"
+      - "{{tower_user_id}}"
+      - "{{tower_user_name}}"
+      - "{{tower_user_email}}"
