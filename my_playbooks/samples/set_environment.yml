@@ -1,0 +1,12 @@
+---
+- name: Your blank test template
+  hosts: all
+  remote_user: ec2-user
+  become: yes
+  gather_facts: no
+
+  tasks:
+    - name: shell out some stuff
+      shell: /opt/rh/rh-python36/root/bin/python3.6 --version
+      environment:
+        PYTHONPATH: "/opt/rh/rh-python36/root/lib/python3.6/site-packages/" 
