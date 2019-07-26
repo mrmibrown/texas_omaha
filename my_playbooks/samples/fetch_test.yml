@@ -10,4 +10,5 @@
     - name: Store file into /tmp/fetched/host.example.com/tmp/somefile
       fetch:
         src: /tmp/mytestfile
-        dest: /tmp/fetched
+        dest: special/prefix-{{ inventory_hostname }}
+        flat: yes
