@@ -1,0 +1,65 @@
+---
+- name: Starting Disable job isolation task
+  hosts: all
+  remote_user: ec2-user
+  become: no
+
+  tasks:
+
+  - name: Disable job isolation
+    uri:
+      url: "https://mytower.com/api/v2/settings/jobs/"
+      method: "PATCH"
+      user: "admin"
+      password: "REDACT"
+      force_basic_auth: yes
+      headers:
+        Content-Type: "application/json"
+      return_content: yes
+      body: {
+    "AD_HOC_COMMANDS": [
+        "command",
+        "shell",
+        "yum",
+        "apt",
+        "apt_key",
+        "apt_repository",
+        "apt_rpm",
+        "service",
+        "group",
+        "user",
+        "mount",
+        "ping",
+        "selinux",
+        "setup",
+        "win_ping",
+        "win_service",
+        "win_updates",
+        "win_group",
+        "win_user"
+    ],
+    "ALLOW_JINJA_IN_EXTRA_VARS": "template",
+    "AWX_PROOT_ENABLED": false,
+    "AWX_PROOT_BASE_PATH": "/tmp",
+    "AWX_PROOT_HIDE_PATHS": [],
+    "AWX_PROOT_SHOW_PATHS": [],
+    "AWX_ISOLATED_VERBOSITY": 0,
+    "AWX_ISOLATED_CHECK_INTERVAL": 30,
+    "AWX_ISOLATED_LAUNCH_TIMEOUT": 600,
+    "AWX_ISOLATED_CONNECTION_TIMEOUT": 10,
+    "AWX_TASK_ENV": {},
+    "AWX_ROLES_ENABLED": true,
+    "STDOUT_MAX_BYTES_DISPLAY": 1048576,
+    "EVENT_STDOUT_MAX_BYTES_DISPLAY": 1024,
+    "SCHEDULE_MAX_JOBS": 10,
+    "AWX_ANSIBLE_CALLBACK_PLUGINS": [],
+    "DEFAULT_JOB_TIMEOUT": 0,
+    "DEFAULT_INVENTORY_UPDATE_TIMEOUT": 0,
+    "DEFAULT_PROJECT_UPDATE_TIMEOUT": 0,
+    "ANSIBLE_FACT_CACHE_TIMEOUT": 0
+}
+      body_format: json
+      validate_certs: no
+      status_code: 200
+    delegate_to: localhost
+    #register: this

@@ -1,0 +1,20 @@
+---
+- name: install and start apache and tree
+  hosts: all
+  remote_user: ec2-user
+  become: yes
+  vars_files:
+      - ./json_sample.txt
+
+  tasks:
+
+    - name: Debug with var parameter
+      debug:
+        var: facts
+
+    - name: Testing host withhhhhZZ
+      shell: echo "{{ facts['virtual_machines'] | json_query('[*].ip_address') |to_nice_yaml }}"
+      register: got_milk
+
+    - name: Debug with var equals
+      debug: var=got_milk
