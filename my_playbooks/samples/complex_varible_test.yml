@@ -1,0 +1,31 @@
+---
+- name: Your blank test template
+  hosts: localhost
+  #remote_user: ec2-user
+  become: no
+  gather_facts: no
+  vars:
+      listOne:
+        - configure
+      listTwo:
+        - 2792
+        - 2892
+  tasks:
+
+    - debug:
+        msg: "{{ listOne }}"
+
+    - debug:
+        msg: "{{ listTwo }}"
+
+    - name: Setting Up A New List
+      set_fact:
+        cmds:
+          - "no vlan {{item}}"
+      loop:  "{{ listTwo }}"
+      register: listtest
+
+    - name: Checking the contents of 'listtest'
+      debug:
+        msg: "{{ listOne }} + {{ item.ansible_facts.cmds }}"
+      loop: "{{ listtest.results }}"
