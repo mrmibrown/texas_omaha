@@ -1,7 +1,0 @@
-#!/bin/bash
-cd /Users/miltonbrown/Documents/scripts
-echo "Filename: "
-read myfile
-scp -i "/Users/miltonbrown/Documents/keys/milton.pem" $myfile ec2-user@$1:~/
-cd -
-ssh -i "/Users/miltonbrown/Documents/keys/milton.pem" -l ec2-user $1
