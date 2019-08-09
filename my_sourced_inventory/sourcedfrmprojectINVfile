@@ -12,7 +12,6 @@ devbox1 ansible_host=<hostname_here>
 testbox1 ansible_host=<hostname_here>
 testbox2 ansible_host=<hostname_here>
 testbox3 ansible_host=<hostname_here>
-testbox4 ansible_host=<hostname_here>
 mynewbox1 ansible_host=<hostname_here>
 
 [all:vars]
