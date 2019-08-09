@@ -1,6 +1,17 @@
-[srcd_All_Micros]
-Micro1 ansible_host=<hostname_here>
-Micro2 ansible_host=<hostname_here>
+[nonprod]
+nonprodbox1 ansible_host=<hostname_here>
+nonprodbox2 ansible_host=<hostname_here>
+
+
+[dev]
+devbox1 ansible_host=<hostname_here>
+
+
+[test]
+testbox1 ansible_host=<hostname_here>
+testbox2 ansible_host=<hostname_here>
+testbox3 ansible_host=<hostname_here>
+testbox4 ansible_host=<hostname_here>
 
 [all:vars]
 ansible_user='ec2-user'
