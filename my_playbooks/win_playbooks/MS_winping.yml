@@ -5,3 +5,4 @@
   tasks:
   - name: Win Ping
     win_ping:
+
