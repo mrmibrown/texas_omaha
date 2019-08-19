@@ -1,0 +1,17 @@
+---
+- name:  initializing windows site
+  hosts: winbox
+
+  tasks:
+  - name: Install all security, critical, and rollup updates without a scheduled task
+    win_updates:
+      category_names:
+        - SecurityUpdates
+        - CriticalUpdates
+        - UpdateRollups
+      state: installed
+  - name: Ensure we wait long enough for the updates to be applied during reboot
+    win_updates:
+      reboot: yes
+
+ 

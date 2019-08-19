@@ -1,0 +1,58 @@
+- hosts: localhost
+  connection: local
+
+  vars:
+    sap_create_vars:
+      client_id: "my-cleint-id-client-ide2b421"
+      client_secret: “REDACTED”
+
+  tasks:
+
+    - name: Get facts for the load balancer
+      azure_rm_loadbalancer_facts:
+        name: "my-lb-name"
+        resource_group: "my-resource-group904"
+        tenant: "my-tenant-id-tenant-idcb9"
+        subscription_id: "my-subscription-id-subscription-id6a6c"
+        client_id: "{{ sap_create_vars.client_id }}"
+        secret: "{{ sap_create_vars.client_secret }}"
+      delegate_to: localhost
+      connection: local
+      become: no
+      run_once: true
+          
+    - debug:
+        var: azure_loadbalancers
+    
+    - name: Get load balancer subnet ID from facts
+      set_fact:
+        sap_create_loadbalancer_subnet_ids: |-
+          {% set d ={} -%}
+          {% for lb in azure_loadbalancers -%}
+            {% for fe in lb.properties.frontendIPConfigurations -%}
+              {% set x = d.__setitem__( (fe.properties.subnet.id.split("/") | last), fe.properties.subnet.id ) -%}
+            {% endfor -%}
+          {% endfor -%}
+          {{ d }}
+      run_once: true
+      
+    - debug:
+        var: sap_create_loadbalancer_subnet_ids
+      
+    - name: Get facts for the load balancer subnets
+      azure_rm_resource_facts:
+        url: "{{ item.value }}"
+        api_version: "2018-12-01"
+        tenant: "my-tenant-id-tenant-idcb9"
+        subscription_id: "my-subscription-id-subscription-id6a6c"
+        client_id: "{{ sap_create_vars.client_id }}"
+        secret: "{{ sap_create_vars.client_secret }}"
+      register: sap_create_loadbalancer_subnet_facts
+      loop: "{{ sap_create_loadbalancer_subnet_ids | dict2items }}"
+      delegate_to: localhost
+      connection: local
+      become: no
+      run_once: true
+        
+    - debug:
+        var: sap_create_loadbalancer_subnet_facts
