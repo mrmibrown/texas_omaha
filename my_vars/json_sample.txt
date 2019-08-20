@@ -1,4 +1,4 @@
-"meraki_network.data": [
+"meraki_network": [
         {
             "claimedAt": "1432833922.93661", 
             "mac": "00:18:0a:7a:3f:ed", 

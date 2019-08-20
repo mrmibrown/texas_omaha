@@ -1,0 +1,25 @@
+"facts": {
+        "virtual_machines": [
+            {
+                "attributes": {},
+                "cluster": "BNP",
+                "esxi_hostname": "usboitdesx04.bainnonprod.com",
+                "guest_fullname": "Microsoft Windows Server 2012 (64-bit)",
+                "guest_name": "usboitdapp62",
+                "ip_address": "10.113.181.151",
+                "mac_address": [
+                    "00:50:56:b8:8d:71"
+                ],
+                "power_state": "poweredOn",
+                "uuid": "4238988c-3b41-aa34-f682-fde9a1e8bde2",
+                "vm_network": {
+                    "00:50:56:b8:8d:71": {
+                        "ipv4": [
+                            "10.113.181.151"
+                        ],
+                        "ipv6": []
+                    }
+                }
+            }
+        ]
+    }
