@@ -1,0 +1,14 @@
+---
+- name: Starting Blank Playbook
+  hosts: localhost
+  #remote_user: ec2-user
+  #become: yes
+  connection: local
+
+  tasks:
+
+    - name: Pinging localhost...
+      ping:
+
+    - name: Pinging remote host with shell module...
+      shell: ping -c 1 "REDACT.internal"

@@ -1,5 +1,5 @@
 [winbox]
-ip-172-31-43-99.us-east-2.compute.internal
+REDACT.internal
 
 [all:vars]
 ansible_user=miket
