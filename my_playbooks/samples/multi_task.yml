@@ -1,0 +1,32 @@
+---
+- name: install and start apache and tree
+  hosts: mb2
+#  remote_user: ec2-user
+  become: yes
+  gather_facts: yes
+  ignore_errors: yes
+
+  tasks:
+  - name: HOST1install apache
+    yum: name=httpd state=present
+
+  - name: install tree
+    yum: name=tree state=present
+
+  - name: start apache
+    service: name=httpd state=started enabled=yes
+
+- name: install on mb1
+  hosts: 10.42.0.6
+#  remote_user: ec2-use
+  become: yes
+  ignore_errors: yes
+  tasks:
+  - name: install apache
+    yum: name=httpd state=present
+
+  - name: install tree
+    yum: name=tree state=present
+
+  - name: start apache
+    service: name=httpd state=started enabled=yes

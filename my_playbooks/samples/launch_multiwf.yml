@@ -1,0 +1,23 @@
+---
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: launch 7 workflows
+      uri: 
+        url: "https://mybox.compute.amazonaws.com/api/v2/workflow_job_templates/12/launch/"
+        url_username: admin
+        url_password: password
+        validate_certs: false
+        status_code: 201
+        method: POST
+        force_basic_auth: true
+      with_items:
+        - bar
+        - car
+        - tar
+        - zar
+        - nar
+        - har
+        - sar
+        - lar
+        - jar
