@@ -1,0 +1,13 @@
+---
+- name: Maryann Job Test
+  hosts: all
+  remote_user: ec2-user
+  become: yes
+  gather_facts: no
+  vars_files:
+    - ../../my_vars/json_sample_mary.txt
+
+  tasks:
+
+    - debug:
+        msg: "Here is the vvarr: {{ maryvar }}"
