@@ -11,5 +11,5 @@
   - name: install tree
     yum: name=tree state=present
 
-  - name: start apache
-    service: name=httpd state=started enabled=yes
+  #- name: start apache
+  #  service: name=httpd state=started enabled=yes
