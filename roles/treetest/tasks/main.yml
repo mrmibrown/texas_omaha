@@ -1,6 +1,0 @@
----
----
-- name: Install package
-  yum:
-    name: tree
-    state: present
