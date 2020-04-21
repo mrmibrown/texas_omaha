@@ -3,3 +3,4 @@ template: rhcos-4.3.8
 state: present
 customization: {}
 wait_for_customization: no
+turkey: real
