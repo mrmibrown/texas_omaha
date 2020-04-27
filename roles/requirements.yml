@@ -4,7 +4,8 @@
   #- src: https://github.com/mrmibrown/vartest
 
 #- src: https://github.com/mrmibrown/treetest
-- src: git@github.com:mrmibrown/treetest
+#- src: git@github.com:mrmibrown/treetest
+- src: ssh://git@github.com:mrmibrown/treetest
   scm: git
   version: master
 #roles:
