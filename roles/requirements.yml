@@ -5,6 +5,6 @@
 
 #- src: https://github.com/mrmibrown/treetest
 #- src: git@github.com:mrmibrown/treetest
-- src: git://mrmibrown.github.com/treetest/
+- src: ssh://git@github.com:7999/mrmibrown/treetest
   scm: git
   version: master
