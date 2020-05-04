@@ -6,6 +6,6 @@
   tasks:
   - name: Touch a file, using symbolic modes to set the permissions (equivalent to 0644)
     file:
-      path: /tmp/mytestfile
+      path: /adumps/mytestfile
       state: touch
       mode: u=rw,g=rw,o=rw
