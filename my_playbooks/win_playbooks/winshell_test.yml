@@ -4,4 +4,4 @@
 
   tasks:
   - name: Starting win_shell test...
-    win_shell: C:\Windows\Temp\myscript.ps1 >> C:\Windows\Temp\somelog.txt
+    win_shell: & "C:\Windows\Temp\myscript.ps1" >> "C:\Windows\Temp\somelog.txt"
