@@ -1,0 +1,18 @@
+---
+- name: Checking Windows Services
+  hosts: all
+
+  tasks:
+  - name: Checking if service exists
+    win_service:
+       name: "{{ sname }}"
+    register: service_exists
+
+  - name: Stopping service only if service exists
+    win_service:
+       name: "{{ sname }}"
+       state: stopped
+    async: 360
+    poll: 10
+    ignore_errors: yes
+    when: service_exists.exists
