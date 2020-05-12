@@ -1,0 +1,16 @@
+all:
+  vars:
+    java_type: jre
+    java_version: 1.8.0
+    use_connection: intabrigoapp_centos
+
+  children:
+    verdaccio:
+      hosts:
+        vccdevverd01.int.abrigo.app:
+          verdaccio_use_ssl: true
+          verdaccio_certFile: star_abrigo_app.pfx.encrypted
+          verdaccio_certPass: secret
+        vccbldvrd01.sw.dc:
+          verdaccio_use_ssl: false
+          use_connection: swdc_centos
