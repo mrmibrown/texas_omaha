@@ -15,6 +15,7 @@
   - name: waiting for "{{ my_delay }}" seconds...
     wait_for:
       timeout: "{{ my_delay }}"
+    {{ my_delay | type_debug }}
 
   #- name: start apache
   #  service: name=httpd state=started enabled=yes
