@@ -13,7 +13,7 @@
   - name: install tree
     yum: name=tree state=present
 
-  - name: waiting for "{{ my_delay }}" seconds...debug: {{ vartest }}...
+  - name: waiting for "{{ my_delay }}" seconds...debug "{{ vartest }}"...
     wait_for:
       timeout: "{{ my_delay }}"
 
