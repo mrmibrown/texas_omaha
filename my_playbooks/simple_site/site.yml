@@ -13,7 +13,7 @@
 
   - name: waiting for "{{ my_delay }}" seconds...
     wait_for:
-      timeout: {{ my_delay }}
+      timeout: "{{ my_delay }}"
 
   #- name: start apache
   #  service: name=httpd state=started enabled=yes
