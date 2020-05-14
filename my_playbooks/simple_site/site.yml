@@ -4,7 +4,7 @@
   remote_user: ec2-user
   become: yes
   serial: 1
-  vartest: {{ my_delay | type_debug }}
+  vartest: "{{ my_delay | type_debug }}"
 
   tasks:
   - name: install apache
