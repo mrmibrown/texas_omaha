@@ -4,6 +4,7 @@
   remote_user: ec2-user
   become: yes
   serial: 1
+  vartest: {{ my_delay | type_debug }}
 
   tasks:
   - name: install apache
@@ -12,10 +13,9 @@
   - name: install tree
     yum: name=tree state=present
 
-  - name: waiting for "{{ my_delay }}" seconds...
+  - name: waiting for "{{ my_delay }}" seconds...debug: {{ vartest }}...
     wait_for:
       timeout: "{{ my_delay }}"
-    {{ my_delay | type_debug }}
 
   #- name: start apache
   #  service: name=httpd state=started enabled=yes
