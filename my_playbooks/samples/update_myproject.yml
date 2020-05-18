@@ -1,23 +1,22 @@
 ---
 - name: Updating project from playbook
   hosts: all
-  remote_user: ec2-user
+  remote_user: my_user
   become: yes
+  gather_facts: no
 
   tasks:
 
-  - name: Updating project now...
+  - name: Updating project on Node 1 now...
     uri:
-      url: "https://ec2-3-23-101-49.us-east-2.compute.amazonaws.com/api/v2/projects/9/update/"
+      url: "https://myclusternode1.com/api/v2/projects/9/update/"
       method: "POST"
       user: "admin"
       password: "REDACT"
-      #force_basic_auth: yes
+      force_basic_auth: yes
       headers:
         Content-Type: "application/json"
-      return_content: yes
       body: {}
       body_format: json
       validate_certs: no
-      status_code: 201
-    #register: this
+      status_code: 202
