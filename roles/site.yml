@@ -1,0 +1,16 @@
+---
+- name: apply the lb configuration
+  hosts: lbservers
+  remote_user: ec2-user
+  become: yes
+
+  vars:
+    mode: http
+    iface: '{{ ansible_default_ipv4.interface }}'
+    daemonname: myapplb
+    listenport: 8888
+    balance: roundrobin
+    httpd_port: 80
+
+  roles:
+  - haproxy

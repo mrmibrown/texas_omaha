@@ -1,0 +1,6 @@
+---
+# defaults file for vc
+vc_hostname: 172.17.0.2
+vc_datacenter: "DC0"
+vc_datastore: "LocalDS_0"
+vc_vm_name: "Test_VM_by_mb589mb"

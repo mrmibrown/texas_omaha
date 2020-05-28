@@ -1,0 +1,9 @@
+---
+- name: Launching Vcenter instance(s)
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  become: yes
+
+  roles:
+    - mb-vc
