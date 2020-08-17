@@ -1,0 +1,14 @@
+---
+- name: Sample Wait Task adhoc job
+  hosts: all
+  remote_user: ec2-user
+  become: yes
+  gather_facts: no
+  vars:
+    idle_timer: 300
+
+  tasks:
+
+    - name: Sleeping for "{{ idle_timer }}" seconds...Please stand by...
+      wait_for:
+        timeout: "{{ idle_timer }}"
