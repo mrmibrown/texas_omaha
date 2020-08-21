@@ -2,7 +2,7 @@
 - name: Sample Wait Task adhoc job
   hosts: all
   remote_user: ec2-user
-  become: yes
+  become: no
   gather_facts: no
   vars:
     idle_timer: 300
