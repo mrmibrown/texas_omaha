@@ -19,8 +19,9 @@
     rescue:
       - name: make sure all handlers run
         meta: flush_handlers
+        delegate_to: localhost
   handlers:
     - name: run me even after an error
       debug:
         msg: 'This handler runs even on error'
-
+      delegate_to: localhost
