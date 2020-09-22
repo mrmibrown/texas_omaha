@@ -23,3 +23,6 @@
   - name: Debug with msg parameter
     debug:
       msg: "Testing msg debug --> {{ got_milk }}"
+
+  - name: Debug alternate syntax
+    debug: msg="{{ got_milk }}"
