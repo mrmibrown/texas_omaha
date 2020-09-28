@@ -10,6 +10,7 @@
     - name: Setting facts so that they will be persisted in the fact cache
       set_fact:
         dog_name: fido
+        cacheable: yes
 
     - ping:
 
