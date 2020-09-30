@@ -1,6 +1,9 @@
 ---
 - name:  initializing windows site
   hosts: mywinBoxgrp
+  vars:
+     machine:
+       password: '{{ ansible_password }}'
 
   tasks:
   - name: Install git
