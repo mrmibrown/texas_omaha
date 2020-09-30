@@ -1,6 +1,7 @@
 ---
 - name:  initializing windows site
   hosts: all
+  gather_facts: no
 
   tasks:
   - name: Win Ping
