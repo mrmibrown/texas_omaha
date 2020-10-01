@@ -1,15 +1,8 @@
 ---
 - name: Starting playbook
   hosts: all
+  gather_facts: false
 
   tasks:
-  - name: Setting facts so that they will be persisted in the fact cache
-    set_fact:
-      cat_name: cookie
-      cacheable: yes
-
-  - name: Win Ping
-    win_ping:
- 
   - name: Clear gathered facts from all currently targeted hosts
     meta: clear_facts
