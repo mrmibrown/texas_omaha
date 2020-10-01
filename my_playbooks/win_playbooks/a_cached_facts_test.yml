@@ -10,3 +10,6 @@
 
   - name: Win Ping
     win_ping:
+ 
+  - name: Clear gathered facts from all currently targeted hosts
+      meta: clear_facts
