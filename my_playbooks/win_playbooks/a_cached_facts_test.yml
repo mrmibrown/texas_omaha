@@ -1,0 +1,7 @@
+---
+- name: Starting playbook
+  hosts: all
+
+  tasks:
+  - name: Win Ping
+    win_ping:
