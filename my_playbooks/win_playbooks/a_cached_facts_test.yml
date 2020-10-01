@@ -12,4 +12,4 @@
     win_ping:
  
   - name: Clear gathered facts from all currently targeted hosts
-      meta: clear_facts
+    meta: clear_facts
