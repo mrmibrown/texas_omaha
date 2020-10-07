@@ -1,15 +1,8 @@
 ---
 - name:  initializing windows site
-  hosts: winbox
+  hosts: all
+  gather_facts: no
 
   tasks:
-
-  -  name: Get facts for one resource group including resources it contains
-     azure_rm_resourcegroup_facts:
-         name: "{{ rgname }}"
-         list_resources: yes
-         subscription_id: "{{ AZURE_SUBSCRIPTION_ID }}"
-         ad_user: "{{ AZURE_ADUSER }}"
-         password: "{{ AZURE_ADPASSWORD }}"
-         tenant: "{{ AZURE_ADTENANT }}"
-     register: rg_facts
+  - name: Win Ping
+    win_ping:
