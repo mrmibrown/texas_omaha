@@ -4,14 +4,11 @@
   remote_user: ec2-user
   become: yes
   gather_facts: no
-  roles:
-    - { role: mrmibrown.treetest }
 
   tasks:
 
-    - my_test:
-        name: fido
-
+    - include_role:
+        name: treetest
 #
 #
 
