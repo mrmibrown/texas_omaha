@@ -1,0 +1,6 @@
+- src: geerlingguy.repo-epel
+
+- name: rabbitmq
+  scm: git
+  src: git@code.gulfcoast.edu:ansible/ansible-role-rabbitmq.git
+  version: master
