@@ -1,4 +1,6 @@
 ---
-- hosts: all
+- name: Your blank test template
+  hosts: localhost
   roles:
-    - treetest
+    - { role: mrmibrown.treetest }
+
