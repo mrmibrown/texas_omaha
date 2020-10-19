@@ -1,6 +1,10 @@
 ---
 - name: Your blank test template
-  hosts: localhost
-  roles:
-    - { role: mrmibrown.treetest }
+  hosts: all
+
+  tasks:
+
+    - name: Include the example role
+      include_role:
+        name: treetest
 
