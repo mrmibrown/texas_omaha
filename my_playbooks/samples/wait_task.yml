@@ -12,3 +12,4 @@
     - name: Sleeping for "{{ idle_timer }}" seconds...Please stand by...
       wait_for:
         timeout: "{{ idle_timer }}"
+      timeout: 35
