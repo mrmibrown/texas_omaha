@@ -1,5 +1,4 @@
 ---
-- name: Testing treetest role
-  hosts: all
+- hosts: all
   roles:
-    - { role: mrmibrown.treetest }
+    - treetest
