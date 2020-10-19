@@ -1,7 +1,6 @@
 ---
-#roles:
-  # Install a role from github.
-  #- src: https://github.com/mrmibrown/vartest
-- src: git@github.com/mrmibrown/treetest
-  scm: git
-  version: master
+roles:
+   Install a role from github.
+  - src: https://github.com/mrmibrown/vartest
+
+#- src: https://github.com/mrmibrown/treetest
