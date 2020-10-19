@@ -1,5 +1,5 @@
 ---
-- name: Testing role
+- name: Testing Github role
   hosts: all
 
   tasks:

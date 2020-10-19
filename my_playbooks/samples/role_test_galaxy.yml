@@ -1,5 +1,5 @@
 ---
-- name: Testing role
+- name: Testing Galaxy role
   hosts: all
 
   tasks:
