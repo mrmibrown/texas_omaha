@@ -1,10 +1,7 @@
 ---
 - name: Testing Github role
   hosts: all
+  become: yes
 
-  tasks:
-
-    - name: EDITInclude the example role
-      include_role:
-        name: mrmibrown.treetest
-
+  roles:
+    - treetest
