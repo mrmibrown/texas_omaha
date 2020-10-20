@@ -1,16 +1,8 @@
 ---
-- name: Your blank test template
+- name: Pinging Playbook
   hosts: all
-  remote_user: ec2-user
-  become: yes
-  gather_facts: yes
 
   tasks:
-
-    - name: Setting facts so that they will be persisted in the fact cache
-      set_fact:
-        cat_name: cookie
-        cacheable: yes
 
     - ping:
 
