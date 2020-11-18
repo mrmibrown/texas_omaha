@@ -1,4 +1,2 @@
----
 collections:
-  - name: azure.azcollection
-    source: https://galaxy.ansible.com
+- name: community.vmware
