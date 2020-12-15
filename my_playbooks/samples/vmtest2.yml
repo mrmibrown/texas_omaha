@@ -1,18 +1,17 @@
 ---
-- name: vmtest playbook
+- name: Pinging Playbook
   hosts: all
-  gather_facts: no
 
   tasks:
-  
+
   - name: Gather some info from a guest using the vSphere API output schema
-    community.vmware.vmware_guest_info:
-      hostname: "vcenter_server"
-      username: "vcenter_use"
-      password: "vcenter_pass"
+    vmware_guest_info:
+      hostname: "{{ vcenter_hostname }}"
+      username: "{{ vcenter_username }}"
+      password: "{{ vcenter_password }}"
       validate_certs: no
-      datacenter: "datacenter_name"
-      name: "BOW7XAPPP004"
+      datacenter: "{{ datacenter_name }}"
+      name: "{{ vm_name }}"
       schema: "vsphere"
       properties: ["config.hardware.memoryMB", "guest.disk", "overallStatus"]
     delegate_to: localhost
