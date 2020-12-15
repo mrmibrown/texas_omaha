@@ -1,4 +1,4 @@
 ---
+---
 collections:
-  - name: azure.azcollection
-    source: https://galaxy.ansible.com
+  - awx.awx.tower_workflow_job_template
