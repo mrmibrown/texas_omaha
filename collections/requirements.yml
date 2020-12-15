@@ -1,4 +1,3 @@
 ---
----
 collections:
   - awx.awx.tower_workflow_job_template
