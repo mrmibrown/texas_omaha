@@ -4,9 +4,8 @@
   tasks:
   - name: Ensure Workflow Template exists
     tower_workflow_template:
-      name: R Workflow
+      name: AUTOworkflow
       description: A new workflow template
-      schema: "{{ lookup('file', '{{ playbook_dir }}/surveys/workflow_schema.yml') }}"
       state: present
       survey_enabled: true
       survey: "{{ lookup('file', '{{ playbook_dir }}/surveys/survey_spec.json') }}"
