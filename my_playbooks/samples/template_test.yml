@@ -26,4 +26,6 @@
         }
       state: present
       validate_certs: no
-    delegate_to: localhost
+      tower_host: {{ twr_host }}
+      tower_password": {{ twr_password }}
+      tower_username": admin
