@@ -7,7 +7,7 @@
   tasks:
 
   - name: Create Workflow Job Templates
-    awx.awx.tower_workflow_job_template:
+    awx.awx.tower_workflow_template:
       name: My AutoWF
       description: This is my autowf
       organization: Default
