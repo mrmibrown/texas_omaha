@@ -7,7 +7,7 @@
   tasks:
 
   - name: Create Workflow Job Templates
-    ansible.tower.tower_workflow_job_template:
+    awx.awx.tower_workflow_job_template:
       allow_simultaneous: "{{ item.1.simultaneous }}"
       ask_inventory_on_launch: "{{ item.1.launch_inv }}"
       ask_limit_on_launch: "{{ item.1.launch_limit }}"
