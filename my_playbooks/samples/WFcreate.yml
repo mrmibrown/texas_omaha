@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  gather_facts: false
+  tasks:
+  - name: Ensure Workflow Template exists
+    tower_workflow_template:
+      name: R Workflow
+      description: A new workflow template
+      schema: "{{ lookup('file', '{{ playbook_dir }}/surveys/workflow_schema.yml') }}"
+      state: present
+      survey_enabled: true
+      survey: "{{ lookup('file', '{{ playbook_dir }}/surveys/survey_spec.json') }}"
+      tower_username: admin
+      tower_password: password
+      tower_host: http://localhost:8052
+      tower_verify_ssl: false
