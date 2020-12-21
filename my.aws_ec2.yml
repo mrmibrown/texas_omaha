@@ -1,5 +1,2 @@
 regions:
   - us-east-2c
-filters:
-hostnames:
-  - tag:Name
