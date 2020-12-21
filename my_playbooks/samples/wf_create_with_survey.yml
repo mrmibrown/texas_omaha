@@ -1,0 +1,34 @@
+---
+- name: WF creator Playbook
+  hosts: localhost
+
+  tasks:
+
+  - name: Create Workflow Job Templates
+    ansible.tower.tower_workflow_job_template:
+      name: My AutoWFtest
+      description: This is my autowftest
+      organization: Default
+      survey_enabled: yes
+      survey: {
+            "name": "Dogs",
+            "description": "They're Good Dogs, Brent!",
+            "spec": [ {
+                    "question_name": "What color is the dog?",
+                    "question_description": "",
+                    "required": true,
+                    "type": "text",
+                    "variable": "dog_color",
+                    "min": 0,
+                    "max": 1024,
+                    "default": "Black",
+                    "choices": "",
+                    "new_question": true
+                    }
+            ]
+        }
+      state: present
+      validate_certs: no
+      tower_host: {{ var_here }} 
+      tower_username: {{ var_here }}
+      tower_password: {{ var_here }}
