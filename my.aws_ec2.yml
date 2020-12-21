@@ -4,12 +4,3 @@ regions:
 filters:
 hostnames:
   - tag:Name
-  - private-ip-address
-keyed_groups:
-  - prefix: ec2_tag
-    key: tags
-compose:
-  ansible_host: private_ip_address
-  vpc_destination_variable: private_ip_address
-  destination_variable: private_ip_address
-  hostname_variable: tag_Name
