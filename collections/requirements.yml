@@ -3,4 +3,4 @@ collections:
   - name: azure.azcollection
     source: https://galaxy.ansible.com
   
-  - amazon.aws.aws_ec2
+  - amazon.aws
