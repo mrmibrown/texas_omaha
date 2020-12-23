@@ -6,5 +6,5 @@
   
   - name: Running role
     include_role:
-      name: mbcollections.tools.treetest
+      name: mbcollection.tools.treetest
 
