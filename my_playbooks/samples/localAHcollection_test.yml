@@ -1,0 +1,5 @@
+---
+- name: Testing localAH role
+  hosts: all
+  roles:
+    - { role: mbkit.tools }
