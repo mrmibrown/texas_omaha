@@ -4,5 +4,6 @@
   
   task:
   
-  - include_role:
-    name: mbcollections.tools.treetest
+  - name: Running role
+    include_role:
+      name: mbcollections.tools.treetest
