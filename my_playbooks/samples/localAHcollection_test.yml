@@ -2,8 +2,9 @@
 - name: Testing localAH role
   hosts: all
   
-  task:
+  tasks:
   
   - name: Running role
     include_role:
       name: mbcollections.tools.treetest
+
