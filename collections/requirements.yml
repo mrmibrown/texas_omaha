@@ -1,4 +1,4 @@
 ---
 collections:
   - name: community.mongodb
-    source: https://galaxy.ansible.com/api/v2/collections/
+    source: https://galaxy.ansible.com/api/v2/collections
