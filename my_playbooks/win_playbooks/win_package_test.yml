@@ -5,6 +5,6 @@
 
   tasks:
   - name: Install Remote Desktop Connection Manager locally omitting the product_id
-    win_package:
+    ansible.windows.win_package:
       path: C:\Windows\temp\notepad_pp.msi
-      state: absent
+      state: present
