@@ -1,0 +1,10 @@
+---
+- name:  initializing windows site
+  hosts: win_node1
+  gather_facts: no
+
+  tasks:
+  - name: Install Remote Desktop Connection Manager locally omitting the product_id
+    win_package:
+      path: C:\Windows\temp\notepad_pp.msi
+      state: present
