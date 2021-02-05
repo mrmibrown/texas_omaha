@@ -1,0 +1,8 @@
+---
+- name:  initializing windows site
+  hosts: win_node1
+  gather_facts: no
+
+  tasks:
+  - name: Get whoami information
+    ansible.windows.win_whoami:
