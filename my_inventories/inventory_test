@@ -1,7 +1,7 @@
 [microbox]
 linuxbox1
 
-[all:vars]
+[microbox:vars]
 ansible_user='doggy'
 ansible_become=true
 ansible_ssh_private_key_file='/path/to/my.pem'
