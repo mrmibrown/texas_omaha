@@ -5,6 +5,8 @@ regions:
   - us-east-2
 hostnames:
   - private-ip-address
+hostnames:
+  - tag:Name="MB*"
 
 compose:
   # Use the private IP address to connect to the host
