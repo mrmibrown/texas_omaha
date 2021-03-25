@@ -2,6 +2,6 @@
 123.321.123.123.internal
 
 [all:vars]
-ansible_user='doggy'
+ansible_user='ec2-user'
 ansible_become=true
 ansible_ssh_private_key_file='/path/to/my.pem'
