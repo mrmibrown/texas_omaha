@@ -1,6 +1,7 @@
 [microbox]
 linuxbox1
 linuxbox2
+linuxbox3
 
 [microbox:vars]
 ansible_user='doggy'
