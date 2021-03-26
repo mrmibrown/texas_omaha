@@ -1,5 +1,6 @@
 [microbox]
 linuxbox88
+linuxbox99
 
 [microbox:vars]
 ansible_user='ec2-user'
