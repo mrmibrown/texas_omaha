@@ -11,4 +11,4 @@ nonprodbox9 ansible_host=localhost
 nonprodbox10 ansible_host=localhost
 
 [all:vars]
-ansible_connection: local
+ansible_connection=local
