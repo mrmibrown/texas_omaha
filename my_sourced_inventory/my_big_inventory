@@ -1,12 +1,3 @@
 [nonprod]
-testbox1 ansible_connection=local
-testbox2 ansible_connection=local
-testbox3 ansible_connection=local
-testbox4 ansible_connection=local
-testbox5 ansible_connection=local
-testbox6 ansible_connection=local
-testbox7 ansible_connection=local
-testbox8 ansible_connection=local
-testbox9 ansible_connection=local
-testbox10 ansible_connection=local
+testbox[1..100] ansible_connection=local
 
