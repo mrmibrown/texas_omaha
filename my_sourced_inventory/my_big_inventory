@@ -1,5 +1,14 @@
 [nonprod]
-nonprodbox[1..100] ansible_host=localhost
+nonprodbox1 ansible_host=localhost
+nonprodbox2 ansible_host=localhost
+nonprodbox3 ansible_host=localhost
+nonprodbox4 ansible_host=localhost
+nonprodbox5 ansible_host=localhost
+nonprodbox6 ansible_host=localhost
+nonprodbox7 ansible_host=localhost
+nonprodbox8 ansible_host=localhost
+nonprodbox9 ansible_host=localhost
+nonprodbox10 ansible_host=localhost
 
 [all:vars]
 ansible_connection: local
