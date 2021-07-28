@@ -1,0 +1,3 @@
+[nonprod]
+testbox[1:97] ansible_connection=local
+
