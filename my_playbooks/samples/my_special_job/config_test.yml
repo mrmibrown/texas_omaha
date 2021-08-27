@@ -7,5 +7,5 @@
     - name: special config ping
       ping:
       environment:
-        ANSIBLE_CONFIG: "/my_special_configs/ansible.cfg"
+        ANSIBLE_CONFIG: \"/my_special_configs/ansible.cfg\"
 
