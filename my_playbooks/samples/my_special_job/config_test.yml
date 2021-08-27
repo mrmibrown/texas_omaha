@@ -1,0 +1,11 @@
+---
+- name: Pinging Playbook
+  hosts: all
+
+  tasks:
+
+    - name: special config ping
+      ping:
+      environment:
+        ANSIBLE_CONFIG: "/my_special_configs/ansible.cfg"
+
