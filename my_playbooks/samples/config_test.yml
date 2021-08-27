@@ -2,7 +2,7 @@
 - name: Pinging Playbook
   hosts: all
   environment:
-    ANSIBLE_CONFIG: \"my_special_configs/ansible.cfg\"
+    ANSIBLE_CONFIG: \"/my_special_configs/ansible.cfg\"
 
   tasks:
 
