@@ -2,8 +2,8 @@
 - hosts: localhost
   connection: local
   gather_facts: no
-  vars:
-    vm_name: mybox
+  #vars:
+   # vm_name: mybox
 
   tasks:
   - name: sanity check on my variables
