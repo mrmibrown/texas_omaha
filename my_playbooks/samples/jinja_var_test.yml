@@ -2,7 +2,7 @@
 - hosts: localhost
   connection: local
   gather_facts: no
-  var:
+  vars:
     vm_name: mybox
 
   tasks:
