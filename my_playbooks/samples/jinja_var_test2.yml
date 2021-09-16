@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  connection: local
+  vars:
+    vm_name: "{{ ansible_hostname | regex_replace('.corp.ads') }}"
+  tasks:
+    - debug:
+        msg: "{{ vm_name }}"
+    - name: test extra vars
+      shell: echo "{{ vm_disk_name }}"
