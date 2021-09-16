@@ -6,9 +6,14 @@
     vm_name: mybox
 
   tasks:
-  - name: sanity check on my variable
+  - name: sanity check on my variables
     debug:
-      msg: "{{ vm_name }}"
+      msg: "{{ item }}"
+    loop:
+      - "{{ vm_name }}"
+      - "{{ vm_disk_name }}"
+      - "{{ vm_vg_name }}"
+
   - name: find tower variables
     debug:
       msg: "{{ item }}"
