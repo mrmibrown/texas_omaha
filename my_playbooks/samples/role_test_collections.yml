@@ -2,4 +2,4 @@
 - name: Testing treetest role
   hosts: all
   roles:
-    - { role: mbcollection.tools }
+    - mbcollection.tools
