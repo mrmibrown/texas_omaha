@@ -1,5 +1,10 @@
 ---
-- name: Testing treetest role
+- name: Testing Galaxy role
   hosts: all
-  roles:
-    - mbcollection.tools
+
+  tasks:
+
+    - name: Include the example role
+      include_role:
+        name: treetest
+
