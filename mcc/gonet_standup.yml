@@ -1,0 +1,51 @@
+---
+- name: Enable web services
+  hosts: linbox1
+  become: True
+
+  tasks:
+    - name: Make sure httpd, firewalld, mariadb-server, php and php-mysqlnd packages on present on the remote host.
+      yum:
+        name: ['firewalld', 'httpd', 'mariadb-server', 'php', 'php-mysqlnd']
+        state: present
+
+    - name: Make sure firewalld service is enabled/running.
+      service:
+        name: firewalld
+        state: started
+        enabled: True
+
+    - name: Allow the httpd service in firewalld
+      firewalld:
+        service: http
+        permanent: True
+        state: enabled
+        immediate: yes
+
+    - name: Make sure the httpd service is enabled/running.
+      service:
+        name: httpd
+        state: strted
+        enabled: True
+
+    - name: Make sure the mariadb service is enabled/running.
+      service:
+        name: mariadb
+        state: strted
+        enabled: True
+
+    - name: Push the php index page.
+      get_url:
+        url: "http://mysite.com/index.php"
+        dest: /var/www/html/index.php
+        mode: 0644
+
+
+- name: Test access to linbox1 web server.
+  hosts: localhost
+  become: no
+  tasks:
+    - name: Connect to linbox1 web server
+      uri:
+        url: http://linbox1.com
+        status_code: 200
