@@ -1,0 +1,12 @@
+---
+- name: Register/debug the results of a task
+  hosts: localhost
+  tasks:
+    - name: Install Emacs
+      yum:
+        name: emacs
+        state: present
+      register: install_results
+
+    - debug:
+        var: install_results

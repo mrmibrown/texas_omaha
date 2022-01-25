@@ -1,0 +1,17 @@
+#Obsolete INI format; clutters the variable data; host_vars and group_vars <- in cwd, preferred.
+
+[webservers]
+mywebbox.demo.com ansible_user=max
+
+[db_servers]
+mydbbox.demo.com
+
+[db_servers:vars]
+ansible_user=dbuser
+
+[allboxes:children]
+webservers
+db_servers
+
+[allboxes:vars]
+superuser=myuser

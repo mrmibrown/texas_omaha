@@ -1,0 +1,13 @@
+---
+- name: My YaML var demo
+  hosts: localhost
+  vars_files:
+    - vars/myvars_file.yml
+
+  tasks:
+    #Creates the user passed in through the 'user' var.
+    - name: Create the user: {{ user }}
+      user:
+        #This will throw an error when a var is the first value element; MUST use quotes:
+        #name: {{ user }}
+        name: "{{ user }}"

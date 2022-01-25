@@ -1,0 +1,27 @@
+#The Following array is defined as a python dictionary
+users:
+  johnq:
+    first_name: John
+    last_name: Quiz
+    home_dir: /users/johnq
+  scook:
+    first_name: Sam
+    last_name: Cook
+    home_dir: /users/scook
+
+Reference: Dot-notation syntax; some key name can conflict python methods/attributes; Bracket-notation preferred
+~~~
+# Returns 'John'
+users.johnq.first_name
+
+# Returns '/users/scook'
+users.scook.home_dir
+~~~
+
+
+Reference: Bracket-notation syntax; Less problems parsing
+# Returns 'John'
+users['johnq']['first_name']
+
+# Returns '/users/scook'
+users['scook']['home_dir']
