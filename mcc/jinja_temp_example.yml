@@ -1,0 +1,52 @@
+---
+- name: Deploy/start Apache HTTPD service
+  hosts: webservers
+  vars:
+    myweb_pkg: httpd
+    fw_pkg: firewalld
+    web_svc: httpd
+    fw_service: firewalld
+    py_pkg: python3-PyMySQL
+    myrule: http
+
+  tasks:
+    - name: Required packages are installed and up to date
+      yum:
+        name:
+          - "{{ myweb_pkg  }}"
+          - "{{ fw_pkg }}"
+          - "{{ py_pkg }}"
+        state: latest
+
+    - name: The {{ fw_service }} service is started and enabled
+      service:
+        name: "{{ fw_service }}"
+        enabled: true
+        state: started
+
+    - name: The {{ web_svc }} service is started and enabled
+      service:
+        name: "{{ web_svc }}"
+        enabled: true
+        state: started
+
+    - name: Web content is in place
+      copy:
+        content: "Example web content"
+        dest: /var/www/html/index.html
+
+    - name: The firewall port for {{ myrule }} is open
+      firewalld:
+        service: "{{ myrule }}"
+        permanent: true
+        immediate: true
+        state: enabled
+
+- name: Verify the Apache service
+  hosts: localhost
+  become: false
+  tasks:
+    - name: Ensure the webserver is reachable
+      uri:
+        url: http://mynewwebserver.com
+        status_code: 200
