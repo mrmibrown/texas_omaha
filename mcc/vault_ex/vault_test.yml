@@ -1,0 +1,7 @@
+---
+- name: Testing access to vaulted vars
+  hosts: localhost
+  vars_files: ./vars/my_vars
+  tasks:
+    - name: Testing user - "{{ user }}"
+      ping:

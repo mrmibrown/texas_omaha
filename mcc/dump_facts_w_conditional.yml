@@ -1,0 +1,15 @@
+---
+- name: Check host facts
+  hosts: localhost
+  tasks:
+    - name: dump facts
+      debug:
+        var: ansible_facts
+
+    - name: This is a {{ ansible_facts.distribution }} system
+      command: id
+      #DOT NOTATION
+      #when: ansible_facts.distribution  == "CentOS"
+
+      #BRACKET NOTATION
+      when: ansible_facts['distribution'] == "CentOS"

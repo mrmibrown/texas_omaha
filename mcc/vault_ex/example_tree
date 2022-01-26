@@ -1,0 +1,13 @@
+.
+├── ansible.cfg
+├── group_vars
+│   └── mywebservers
+│       └── vars
+├── host_vars
+│   └── mybox.com
+│       ├── vars
+│       └── vault
+├── inventory
+└── playbook.yml
+
+# This example allows ONLY the vaulted vars to be encrypted while additional vars are not
