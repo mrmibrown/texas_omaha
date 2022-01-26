@@ -13,3 +13,5 @@
 
       #BRACKET NOTATION
       when: ansible_facts['distribution'] == "CentOS"
+
+      #NOTE NOTE NOTE ansible < v2.5 ansible_facts.distribution was preceded by 'ansible_' - ansible_facts.ansible_distribution
