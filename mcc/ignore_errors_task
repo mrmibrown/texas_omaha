@@ -1,0 +1,5 @@
+- name: Install pkg ingonring any errors
+  yum:
+    name: bad_package_name
+    state: latest
+  ignore_errors: yes

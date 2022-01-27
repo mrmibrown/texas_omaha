@@ -1,0 +1,19 @@
+---
+- hosts: all
+  force_handlers: yes
+  tasks:
+    - name: a task which always notifies its handler
+      command: /bin/true
+      notify: restart the database
+
+    - name: a failed task that will not notify handlers
+      yum:
+        name: notapkg
+        state: latest
+
+  handlers:
+    - name: restart the database
+      service:
+        name: mariadb
+        state: restarted
+
