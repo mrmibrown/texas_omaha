@@ -1,0 +1,13 @@
+---
+- name: simple var loop
+  hosts: all
+  vars:
+    dev_pkgs:
+      - pkg1
+      - pkg2
+  tasks:
+    - name: install pkgs
+      yum:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ dev_pkgs }}"
