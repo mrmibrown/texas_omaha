@@ -1,0 +1,7 @@
+---
+- name: conditional ping example pb
+  hosts: all
+  tasks:
+    - ping
+      #when: ansible_default_ipv4.address == "123.123.123.321"
+      when: ansible_default_ipv4['address'] == "123.123.123.321"
