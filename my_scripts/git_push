@@ -1,0 +1,7 @@
+#!/bin/bash
+echo "Pushing from this(`pwd`) DIR"
+echo "Enter push_comment: "
+read pcomment
+git add .
+git commit -m "$pcomment"
+git push
