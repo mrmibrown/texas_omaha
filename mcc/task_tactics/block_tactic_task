@@ -1,0 +1,39 @@
+- name: my block example
+  hosts: all
+  tasks:
+    - name: installing and configuring Yum versionlock plugin
+      block:
+      - name: package needed by yum
+        yum:
+          name: yum-plugin-versionlock
+          state: present
+      - name: lock version of tzdata
+        lineinfile:
+          dest: /etc/yum/pluginconf.d/versionlock.list
+          line: tzdata-2016j-1
+          state: present
+      when: ansible_distribution == "RedHat"
+
+
+Or add block/rescue/always handling...
+block - run always
+resucue - if there is a failure in block tasks
+always - runs always...independ of success/failure
+NOTE: the 'when' conditional applies to both rescue/always if it is present.
+
+  tasks:
+    - name: Upgrade DB
+      block:
+        - name: upgrade the database
+          shell:
+            cmd: /usr/local/lib/upgrade-database
+      rescue:
+        - name: revert the database upgrade
+          shell:
+            cmd: /usr/local/lib/revert-database
+      always:
+        - name: always restart the database
+          service:
+            name: mariadb
+            state: restarted
+

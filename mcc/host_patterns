@@ -1,0 +1,15 @@
+#Example host patterns
+
+- hosts: <host_group>
+- hosts: ungrouped
+- hosts: '*'
+- hosts: '!not_these_boxes,or_this_one'
+- hosts: '*.mysite.com'
+- hosts: dev,data*,192.168.5.2
+- hosts: dev,&webservers
+- hosts: all,!prod
+
+
+
+
+

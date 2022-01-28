@@ -1,0 +1,44 @@
+#Includes are dynamically imported at the point in the task it is mentioned
+#Imports are preprocessed when they playbook is initially parsed
+
+#Imports only in play header(top level)
+- name: Prepare the web server
+  import_playbook: web.yml
+
+#import task ex...
+tasks:
+  - import_tasks: mywebserver_tasks.yml
+NOTE: Where mywebserver_tasks.yml is a list of tasks
+
+#or include
+tasks:
+  - include_tasks: webserver_tasks.yml
+
+NOTE: Task file use cases
+- break up server provisioning...e.g. install pkgs, configure services...etc
+- when managed by separate departments
+- conditional configurations
+- only ran on certain groups
+
+
+#module task file import
+---
+  - name: Install the {{ package }} package
+    yum:
+      name: "{{ package }}"
+      state: latest
+  - name: Start the {{ service }} service
+    service:
+      name: "{{ service }}"
+      enabled: true
+      state: starte
+
+...the associated task...
+  tasks:
+    - name: Import task file and set variables
+      import_tasks: task.yml
+      vars:
+        package: httpd
+        service: httpd
+
+

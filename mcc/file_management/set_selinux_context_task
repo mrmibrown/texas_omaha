@@ -1,0 +1,14 @@
+#set SELinux context
+- name: SELinux type is set to samba_share_t
+  file:
+    path: /path/to/samba_file
+    setype: samba_share_t
+
+
+alternatively...
+
+- name: SELinux type is persistently set to samba_share_t
+  sefcontext:
+    target: /path/to/samba_file
+    setype: samba_share_t
+    state: present

@@ -1,0 +1,81 @@
+# {{ ansible_managed }}
+# DO NOT MAKE LOCAL MODIFICATIONS TO THIS FILE AS THEY WILL BE LOST
+
+Port {{ ssh_port }}
+ListenAddress {{ ansible_facts['default_ipv4']['address'] }}
+
+HostKey /etc/ssh/ssh_host_rsa_key
+HostKey /etc/ssh/ssh_host_ecdsa_key
+HostKey /etc/ssh/ssh_host_ed25519_key
+
+SyslogFacility AUTHPRIV
+
+PermitRootLogin {{ root_allowed }}
+AllowGroups {{ groups_allowed }}
+
+AuthorizedKeysFile /etc/.rht_authorized_keys .ssh/authorized_keys
+
+PasswordAuthentication {{ passwords_allowed }}
+
+ChallengeResponseAuthentication no
+
+GSSAPIAuthentication yes
+GSSAPICleanupCredentials no
+
+UsePAM yes
+
+X11Forwarding yes
+UsePrivilegeSeparation sandbox
+
+AcceptEnv LANG LC_CTYPE LC_NUMERIC LC_TIME LC_COLLATE LC_MONETARY LC_MESSAGES
+AcceptEnv LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT
+AcceptEnv LC_IDENTIFICATION LC_ALL LANGUAGE
+AcceptEnv XMODIFIERS
+
+Subsystem sftp	/usr/libexec/openssh/sftp-server
+
+deploy template with task...
+
+tasks:
+  - name: template render
+    template:
+      src: /tmp/j2-template.j2
+      dest: /tmp/dest-config-file.txt
+
+NOTE: Set/uncomment ansible_managed in ansible.cfg
+
+#Deploy hosts file with template...
+
+- name: /etc/hosts is up to date
+  hosts: all
+  gather_facts: yes
+  tasks:
+    - name: Deploy /etc/hosts
+      template:
+        src: templates/hosts.j2
+        dest: /etc/hosts
+
+NOTE: the aforementioned hosts.j2 is generated with...
+{% for host in groups['all'] %}
+{{ hostvars[host]['ansible_facts']['default_ipv4']['address'] }} {{ hostvars[host]['ansible_facts']['fqdn'] }} {{ hostvars[host]['ansible_facts']['hostname'] }}
+{% endfor %}
+
+additionally....conditionals can be used in the template
+{% if finished %}
+{{ result }}
+{% endif %}
+
+Additional variable filters
+{{ output | to_json }}
+{{ output | to_yaml }}
+
+{{ output | to_nice_json }}
+{{ output | to_nice_yaml }}
+
+{{ output | from_json }}
+{{ output | from_yaml }}
+
+# All jinja2 expressions used in 'when' clauses...
+
+- debug: msg="you failed"
+    when: returnvalue is failed||changed||succeeded||skipped # All jinja2 expressions used in 'when' clauses...
