@@ -1,0 +1,11 @@
+#
+Check file contents:
+ansible mysite.com -u devops -b -a "head /etc/postfix/main.cf"
+
+Check the firewalld service for new service
+ansible mysite.com -u devops -b -a "firewall-cmd --list-services"
+
+Check the port of the m_node
+telnet mysite.com 25
+quit
+

@@ -1,3 +1,4 @@
+
 sample ansible.cfg
 ~~~
 [galaxy]
@@ -19,6 +20,11 @@ password=<pass_here>
 
 environment var: ANSIBLE_GALAXY_SERVER_<server_id>_<key>=value
 
+export token:...
+export \
+> ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN='eeyJh...Jf0o'
+
+
 ansible localhost -m community.general.mail -a 'subject="Hello World" to=root'
 
 install DIR: ls \
@@ -31,5 +37,23 @@ list modules: ls \
 > ~/.ansible/collections/ansible_collections/gls/utils/plugins/modules
 
 check module documentation: ansible-doc gls.utils.newping
+
+-------------
+ansible-galaxy collection install \
+> -p /usr/share/ansible/collections community.postgresql
+
+---
+collections:
+  - name: community.crypto
+
+  - name: ansible.posix
+    version: 1.2.0
+
+  - name: /tmp/community-dns-1.2.0.tar.gz
+
+  - name: http://mysite.com/redhat-insights-1.0.5.tar.gz
+
+or ..
+ansible-galaxy collection install -r requirements.yml
 
 
