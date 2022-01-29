@@ -156,4 +156,40 @@ selinux_ports:
     proto: 'tcp'
     state: 'present'
 
+###USING system role
+1] sudo yum install rhel-system-roles
+2] ansible-galaxy list
+3] vi time-config.yml
+---
+- name: Time Synchronization
+  hosts: database_servers
+
+  roles:
+    - rhel-system-roles.timesync
+
+  post_tasks:
+    - name: Set timezone
+      timezone:
+        name: "{{ host_timezone }}"
+      notify: reboot host
+
+  handlers:
+    - name: reboot host
+      reboot:
+4] mkdir -p group_vars/all
+vi group_vars/all/timesync.yml
+---
+#rhel-system-roles.timesync variables for all hosts
+
+timesync_ntp_provider: chrony
+
+timesync_ntp_servers:
+  - hostname: website.com
+    iburst: yes
+
+5] mkdir -pv group_vars/{grp1,grp2}
+6] get timezone and add to group_vars/grp1/timezone.yml
+timedatectl list-timezones|grep Chicago
+echo "host_timezone: `cmdout`" > timezone.yml.....
+7] check with adhoc job: ansible <host_group> -m shell -a date
 
