@@ -1,3 +1,6 @@
+#NOTES:
+- default location gets CREATED when the -p switch is NOT used: /home/myuser/.ansible/roles
+
 ansible-galaxy search 'redis' --platforms EL
 
 ansible-galaxy info geerlingguy.redis
