@@ -1,0 +1,33 @@
+#
+- name: Add new user to the development machine and assign the appropriate groups.
+  user:
+    name: devops_user 1
+    shell: /bin/bash 2
+    groups: sys_admins, developers 3
+    append: yes
+
+- name: Create a SSH key for user1
+  user:
+    name: user1
+    generate_ssh_key: yes
+    ssh_key_bits: 2048
+    ssh_key_file: .ssh/id_my_rsa
+
+- name: Verify that auditors group exists
+  group:
+    name: auditors
+    state: present
+
+- name: copy host keys to remote servers
+  known_hosts:
+    path: /etc/ssh/ssh_known_hosts
+    name: host1
+    key: "{{ lookup('file', 'pubkeys/host1') }}"1
+
+- name: Set authorized key
+  authorized_key:
+    user: user1
+    state: present
+    key: "{{ lookup('file', '/home/user1/.ssh/id_rsa.pub') }}1
+
+

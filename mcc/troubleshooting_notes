@@ -1,0 +1,56 @@
+ansible-playbook play.yml --syntax-check
+ansible-playbook play.yml --step
+ansible-playbook play.yml --start-at-task="start httpd service"
+
+mananged hosts...
+use task in check mode
+tasks:
+    - name: task always in check mode
+      shell: uname -a
+      check_mode: yes
+
+uri test...
+tasks:
+    - uri:
+        url: http://website.com
+        return_content: yes
+      register: apiresponse
+
+    - fail:
+        msg: 'version was not provided'
+      when: "'version' not in apiresponse.content"
+
+test with script...
+  tasks:
+    - script: check_free_memory
+
+
+existing file check....
+tasks:
+    - name: Check if /var/run/app.lock exists
+      stat:
+        path: /var/run/app.lock
+      register: lock
+
+    - name: Fail if the application is running
+      fail:
+      when: lock.stat.exists
+
+assert instead of fail...
+tasks:
+    - name: Check if /var/run/app.lock exists
+      stat:
+        path: /var/run/app.lock
+      register: lock
+
+    - name: Fail if the application is running
+      assert:
+        that:
+          - not lock.stat.exists
+
+##NETwork test...
+ansible demohost -m ping --become
+
+ansible demohost -m command -a 'df'
+ansible demohost -m command -a 'free -m'
+

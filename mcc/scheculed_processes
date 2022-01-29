@@ -1,0 +1,52 @@
+#
+- name: remove tempuser.
+  at:
+    command: userdel -r tempuser
+    count: 20
+    units: minutes
+    unique: yes
+
+- cron:
+    name: "Flush Bolt"
+    user: "root"
+    minute: 45
+    hour: 11
+    job: "php ./app/nut cache:clear"
+
+
+- name: reload web server
+  systemd:
+    name: apache2
+    state: reload
+    daemon-reload: yes
+
+- name: "Reboot after patching"
+  reboot:
+    reboot_timeout: 180
+
+- name: force a quick reboot
+  reboot:
+
+- name: Run a templated variable (always use quote filter to avoid injection)
+    shell: cat {{ myfile|quote }}1
+
+- name: This command only
+  command: /usr/bin/scrape_logs.py arg1 arg2
+  args:1
+    chdir: scripts/
+    creates: /path/to/script
+
+
+- name:
+  hosts: webservers
+  vars:
+    local_shell:  "{{ ansible_env }}"1
+  tasks:
+    - name: Printing all the environment variables in Ansible
+      debug:
+        msg: "{{ local_shell }}"
+
+or...
+"{{ lookup('env','USER','HOME','SHELL') }}"
+
+

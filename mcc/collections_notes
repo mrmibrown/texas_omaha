@@ -1,0 +1,35 @@
+sample ansible.cfg
+~~~
+[galaxy]
+server_list = automation_hub, galaxy  1
+
+[galaxy_server.automation_hub]
+url=https://cloud.redhat.com/api/automation-hub/  2
+auth_url=https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token 3
+token=eyJh...Jf0o 4
+
+[galaxy_server.galaxy]
+url=https://galaxy.ansible.com/
+
+[galaxy_server.automation_hub]
+url=https://cloud.redhat.com/api/automation-hub/
+username=<user_here>
+password=<pass_here>
+~~~
+
+environment var: ANSIBLE_GALAXY_SERVER_<server_id>_<key>=value
+
+ansible localhost -m community.general.mail -a 'subject="Hello World" to=root'
+
+install DIR: ls \
+> ~/.ansible/collections/ansible_collections/gls/utils/roles
+
+check the README: cat \
+> ~/.ansible/collections/ansible_collections/gls/utils/roles/backup/README.md
+
+list modules: ls \
+> ~/.ansible/collections/ansible_collections/gls/utils/plugins/modules
+
+check module documentation: ansible-doc gls.utils.newping
+
+

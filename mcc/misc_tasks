@@ -1,0 +1,68 @@
+#install yum pkg groups
+- name: Install Development Tools
+  yum:
+    name: '@Development Tools' 1
+    state: present
+
+module install...
+- name: Inst perl AppStream module
+  yum:
+    name: '@perl:5.26/minimal' 1
+    state: present
+
+registration....
+subscription-manager register --username=yourusername \
+> --password=yourpassword
+subscription-manager attach --pool=poolID
+ 
+or...
+- name: Register and subscribe the system
+  redhat_subscription:
+    username: yourusername
+    password: yourpassword
+    pool_ids: poolID
+    state: present
+
+enable repo.........
+subscription-manager repos \
+> --enable "rhel-8-for-x86_64-baseos-rpms" \
+> --enable "rhel-8-for-x86_64-baseos-debug-rpms"
+
+or....
+- name: Enable Red Hat repositories
+  rhsm_repository:
+    name:
+      - rhel-8-for-x86_64-baseos-rpms
+      - rhel-8-for-x86_64-baseos-debug-rpms
+    state: present
+
+add repo....
+---
+- name: Configure the company Yum repositories
+  hosts: mybox.com
+  tasks:
+    - name: Ensure Example Repo exists
+      yum_repository:
+        file: example #module adds .repo   1
+        name: example-internal
+        description: Example Inc. Internal YUM repo
+        baseurl: http://myhost.com/yum/repository/
+        enabled: yes
+        gpgcheck: yes   2
+        state: present  3
+
+#you need a key with gpgcheck == true
+- name: Deploy the GPG public key
+      rpm_key:
+        key: http://website.com/yum/repository/RPM-GPG-KEY-example
+        state: present
+
+    - name: Ensure Example Repo exists
+      yum_repository:
+        file: example
+        name: example-internal
+        description: Example Inc. Internal YUM repo
+        baseurl: http://myrepo.com/yum/repository/
+        enabled: yes
+        gpgcheck: yes
+        state: present

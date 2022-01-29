@@ -1,0 +1,57 @@
+ansible-galaxy search 'redis' --platforms EL
+
+ansible-galaxy info geerlingguy.redis
+ansible-galaxy install geerlingguy.redis -p roles/
+
+ansible-galaxy install -r roles/requirements.yml -p roles
+```
+- src: geerlingguy.redis
+  version: "1.5.0"
+```
+
+other requirements.yml examples
+# from Ansible Galaxy, using the latest version
+- src: geerlingguy.redis
+
+# from Ansible Galaxy, overriding the name and using a specific version
+- src: geerlingguy.redis
+  version: "1.5.0"
+  name: redis_prod
+
+# from any Git-based repository, using HTTPS
+- src: https://gitlab.com/guardianproject-ops/ansible-nginx-acme.git
+  scm: git
+  version: 56e00a54
+  name: nginx-acme
+
+# from any Git-based repository, using SSH
+- src: git@gitlab.com:guardianproject-ops/ansible-nginx-acme.git
+  scm: git
+  version: master
+  name: nginx-acme-ssh
+
+# from a role tar ball, given a URL;
+#   supports 'http', 'https', or 'file' protocols
+- src: file:///opt/local/roles/myrole.tar
+  name: myrole
+
+
+
+ansible-galaxy remove nginx-acme-ssh
+use-role.yml
+---
+- name: use redis_prod for Prod machines
+  hosts: redis_prod_servers
+  remote_user: devops
+  become: true
+  roles:
+    - redis_prod
+
+- name: use geerlingguy.redis for Dev machines
+  hosts: redis_dev_servers
+  remote_user: devops
+  become: true
+  roles:
+    - geerlingguy.redis
+
+
