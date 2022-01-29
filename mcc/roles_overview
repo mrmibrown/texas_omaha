@@ -1,0 +1,159 @@
+defaults - main.yml; default values; meant to be overwritten; low precedence
+files - static files reference by role
+handlers main.yml; handler definitions
+meta - main.yml; role/author/license/plaform/dependency info
+tasks - main.yml; task definitions
+templates - jinja2 templates 
+tests - an inventory; test.yml - playbook used to test the role
+vars - main.yml; usually used for internal purposes; high precedence 
+
+example will overwrite any 'defaults' or 'vars' when role2 is called
+---
+- hosts: mysite.com
+  roles:
+    - role: role1
+    - role: role2
+      var1: val1
+      var2: val2
+or...
+roles:
+    - role: role1
+    - { role: role2, var1: val1, var2: val2 }
+
+
+#Roles are executed first alway....unless you use pre_tasks:
+- name: Play to illustrate order of execution
+  hosts: mysite.com
+  pre_tasks:
+    - debug:
+        msg: 'pre-task'
+      notify: my handler
+  roles:
+    - role1
+  tasks:
+    - debug:
+        msg: 'first task'
+      notify: my handler
+  post_tasks:
+    - debug:
+        msg: 'post-task'
+      notify: my handler
+  handlers:
+    - name: my handler
+      debug:
+        msg: Running my handler
+#The handler will be called 3 times inthis case
+
+include example
+- name: Execute a role as a task
+  hosts: mysite.com
+  tasks:
+    - name: A normal task
+      debug:
+        msg: 'first task'
+    - name: A task to include role2 here
+      include_role: role2
+
+
+RHEL system roles - 
+rhel-system-roles.kdump/network/selinux/timesync/postfix/firewall/tuned
+#for RHEL > v6.10
+#derived from 'Linux System Roles' but fully support w/subscription
+# yum install rhel-system-roles
+#located in the /usr/share/ansible/roles directory
+#RHEL var - roles_path
+#Environment var - ANSIBLE_ROLES_PATH
+#documentation for the RHEL System Roles is found in the /usr/share/doc/rhel-system-roles-<version>/ 
+
+#example timesync role
+- name: Time Synchronization Play
+  hosts: servers
+  vars:
+    timesync_ntp_servers:
+      - hostname: 0.rhel.pool.ntp.org
+        iburst: yes
+      - hostname: 1.rhel.pool.ntp.org
+        iburst: yes
+      - hostname: 2.rhel.pool.ntp.org
+        iburst: yes
+    timezone: UTC
+
+  roles:
+    - rhel-system-roles.timesync
+
+  tasks:
+    - name: Set timezone
+      timezone:
+        name: "{{ timezone }}"
+
+NOTE: to set a different time zone, use the 'tzselect' command to look up other valid values; use the 'timedatectl' command to check current clock settings.
+
+##a better way would be to set var in the inventory vars
+├── ansible.cfg
+├── group_vars
+│   └── servers
+│       └── timesync.yml
+├── inventory
+└── timesync_playbook.yml
+
+timesync.yml
+timesync_ntp_servers:
+  - hostname: 0.rhel.pool.ntp.org
+    iburst: yes
+  - hostname: 1.rhel.pool.ntp.org
+    iburst: yes
+  - hostname: 2.rhel.pool.ntp.org
+    iburst: yes
+timezone: UTC
+
+final pb...
+- name: Time Synchronization Play
+  hosts: servers
+  roles:
+    - rhel-system-roles.timesync
+  tasks:
+    - name: Set timezone
+      timezone:
+        name: "{{ timezone }}"
+
+
+#SELinux role notes....
+sets 'selinux_reboot_required' to 'true' and fails if a reboot is needed.   
+- name: Apply SELinux role
+      block:
+        - include_role:
+            name: rhel-system-roles.selinux
+      rescue:
+        - name: Check for failure for other reasons than required reboot
+          fail:
+          when: not selinux_reboot_required
+
+        - name: Restart managed host
+          reboot:
+
+        - name: Reapply SELinux role to complete changes
+          include_role:
+            name: rhel-system-roles.selinux
+
+var setting examples
+selinux_booleans:
+  - name: 'httpd_enable_homedirs'
+    state: 'on'
+    persistent: 'yes'
+
+
+selinux_fcontexts:
+  - target: '/srv/www(/.*)?'
+    setype: 'httpd_sys_content_t'
+    state: 'present'
+
+selinux_restore_dirs:
+  - /srv/www
+
+selinux_ports:
+  - ports: '82'
+    setype: 'http_port_t'
+    proto: 'tcp'
+    state: 'present'
+
+

@@ -11,3 +11,47 @@
         name: "{{ item }}"
         state: present
       loop: "{{ dev_pkgs }}"
+
+
+with loop control...
+- name: Create servers
+  digital_ocean:
+    name: "{{ item.name }}"
+    state: present
+  loop:
+    - name: server1
+      disks: 3gb
+      ram: 15Gb
+      network:
+        nic01: 100Gb
+        nic02: 10Gb
+        ...
+  loop_control:
+    label: "{{ item.name }}"
+
+#pause loop...
+# main.yml
+- name: Create servers, pause 3s before creating next
+  community.digitalocean.digital_ocean:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - server1
+    - server2
+  loop_control:
+    pause: 3
+
+
+#loop iteration stored in the 'index_var'...
+- name: Count our fruit
+  ansible.builtin.debug:
+    msg: "{{ item }} with index {{ my_idx }}"
+  loop:
+    - apple
+    - banana
+    - pear
+  loop_control:
+    index_var: my_idx
+
+
+
