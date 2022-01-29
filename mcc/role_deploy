@@ -1,0 +1,96 @@
+1] 
+mkdir roles;cd roles
+ansible-galaxy init <role_name>
+rm -rfv <role_name>/{defaults,vars,tests}
+
+2] vi ..tasks/main.yml
+---
+# tasks file for myvhost
+
+- name: Ensure httpd is installed
+  yum:
+    name: httpd
+    state: latest
+
+- name: Ensure httpd is started and enabled
+  service:
+    name: httpd
+    state: started
+    enabled: true
+
+- name: vhost file is installed
+  template:
+    src: vhost.conf.j2
+    dest: /etc/httpd/conf.d/vhost.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart httpd
+
+
+3] vi handlers/main.yml
+---
+# handlers file for myvhost
+
+- name: restart httpd
+  service:
+    name: httpd
+    state: restarted
+
+
+4] vhost.conf.j2 into place ..templates/
+# {{ ansible_managed }}
+#
+#<VirtualHost *:80>
+#    ServerAdmin webmaster@{{ ansible_fqdn }}
+#    ServerName {{ ansible_fqdn }}
+#    ErrorLog logs/{{ ansible_hostname }}-error.log
+#    CustomLog logs/{{ ansible_hostname }}-common.log common
+#    DocumentRoot /var/www/vhosts/{{ ansible_hostname }}/
+#
+#    <Directory /var/www/vhosts/{{ ansible_hostname }}/>
+#        Options +Indexes +FollowSymlinks +Includes
+#        Order allow,deny
+#        Allow from all
+#    </Directory>
+#</VirtualHost>
+
+5] add web content 
+mkdir -pv files/html
+echo 'This site works!' >files/html/index.html
+
+
+6] test role try_role.yml
+---
+- name: Use myvhost role playbook
+  hosts: webservers
+  pre_tasks:
+    - name: pre_tasks message
+      debug:
+        msg: 'Ensure web server configuration.'
+
+  roles:
+    - myvhost
+
+  post_tasks:
+    - name: HTML content is installed
+      copy:
+        src: files/html/
+        dest: "/var/www/vhosts/{{ ansible_hostname }}"
+
+    - name: post_tasks message
+      debug:
+        msg: 'Web server is configured.'
+
+7] adhoc test: ansible <host_grp> -a 'systemctl is-active httpd'
+7] adhoc test: ansible <host_grp> -a 'systemctl is-enabled httpd'
+ansible <host_grp> -a 'cat /etc/httpd/conf.d/vhost.conf'
+ansible <host_grp> -a 'cat /var/www/vhosts/servera/index.html'
+ansible <host_grp> -m uri -a 'url=http://localhost return_content=true'
+curl http://website.com - outside test
+
+8]
+9]
+10]
+
