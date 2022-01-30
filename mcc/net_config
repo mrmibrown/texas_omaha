@@ -1,5 +1,10 @@
 #config with role
 ansible-galaxy list
+
+  roles:
+    - rhel-system-roles.network #uses the following  vars file
+
+group_vars/myservers file....
 ---
 network_provider: nm
 network_connections:
@@ -8,6 +13,7 @@ network_connections:
     ip:
       address:
         - 17.25.250.30/24
+----
 
 network_connections:
 - name: eth0 1

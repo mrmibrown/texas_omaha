@@ -1,0 +1,76 @@
+#
+sample samba.conf.j2...
+# {{ random_var }}
+	[global]
+		workgroup = KKAMANSII
+		server string = Samba Server Version %v
+		log file = /var/log/samba/log.%m
+		max log size = 50
+		security = user
+		passdb backend = tdbsam
+		load printers = yes
+		cups options = raw
+	[homes]
+		comment = Home Directories
+		browseable = no
+		writable = yes
+	[printers]
+		comment = All Printers
+		path = /var/spool/samba
+		browseable = no
+		guest ok = no
+		writable = no
+		printable = yes
+----
+
+ansible.cfg...
+[defaults]
+log_path = /home/path/to/ansible.log
+inventory = /home/path/to/inv
+---
+
+
+vars:
+	installed_state: installed
+	random_var: "this is colon: test"
+
+tasks:
+	- name: install samba
+	  state: "{{ install_state }}"
+
+	- name: install firewalld
+	  yum:
+	    name: firewalld
+	    state: installed
+
+	- name: debug install_state variable
+	  debug:
+	    msg: "The state for the samba service is {{ install_state }}"
+
+	- name: start samba
+	  service:
+		name: smb
+		state: started
+		enabled: true
+
+	- name: start firewalld
+	  service:
+		name: firewalld
+		state: started
+		enabled: true
+		
+	- name: Configure firewall for smb
+	  firewalld:
+		state: enabled
+		permanent: true
+		immediate: true
+		service: samba
+
+	- name: deliver samba config
+	  template:
+		src: samba.j2
+		dest: /etc/samba/smb.conf
+		owner: root
+		group: root
+		mode: 0644
+

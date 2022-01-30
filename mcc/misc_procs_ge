@@ -1,0 +1,85 @@
+#
+Add cron...
+- name: Recurring cron job
+  hosts: mywebservers
+  become: true
+
+  tasks:
+    - name: Crontab file exists
+      cron:
+        name: Add date and time to a file
+        minute: "*/2"
+        hour: 9-16
+        weekday: 1-5
+        user: devops
+        job: date >> /home/devops/my_date_time_cron_job
+        cron_file: add-date-time
+        state: present
+
+
+remove cron...
+- name: Remove scheduled cron job
+  hosts: mywebservers
+  become: true
+
+  tasks:
+    - name: Cron job removed
+      cron:
+        name: Add date and time to a file
+        user: devops
+        cron_file: add-date-time
+        state: absent
+
+
+add AT task...
+- name: Schedule at task
+  hosts: mywebservers
+  become: true
+  become_user: devops
+
+  tasks:
+    - name: Create date and time file
+      at:
+        command: "date > ~/my_at_date_time\n"
+        count: 1
+        units: minutes
+        unique: yes
+        state: present
+
+check with...
+ansible mywebservers -u devops \
+> -a "ls -l my_at_date_time"
+
+
+Set boot target....
+- name: Change default boot target
+  hosts: mywebservers
+  become: true
+
+  tasks:
+    - name: Default boot target is graphical
+      file:
+        src: /usr/lib/systemd/system/graphical.target
+        dest: /etc/systemd/system/default.target
+        state: link
+
+ansible mywebservers -u devops -b \
+> -a "systemctl get-default"
+
+
+ tasks:
+    - name: Hosts are rebooted
+      reboot:
+
+ansible mywebservers -u devops -b \
+> -a "who -b"
+
+change default runlevel....
+tasks:
+    - name: Default runlevel is multi-user target
+      file:
+        src: /usr/lib/systemd/system/multi-user.target
+        dest: /etc/systemd/system/default.target
+        state: link
+
+

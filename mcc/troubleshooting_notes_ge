@@ -1,4 +1,57 @@
 #
+---
+Make sure the postfix-relay-main.conf.j2 is in place
+---
+hosts: mymailrelay
+user: myuser
+become: true
+tasks:
+- name: install postfix pkg
+  yum:
+	name: postfix
+	state: installed
+
+- name: install mail config_files
+  template:
+	src:
+	dest:
+	owner:
+	mode: 0644
+  notify: restart postfix
+
+- name: check the main.cf file
+  stat: path=/etc/postfix/main.cf
+  register: maincf
+
+- name: verify the main.cf file existss
+  debug: msg="The main.cf file exists"
+  when: maincf.stat.exists is defined
+
+- name: start and enable mail svcs
+  service:
+	name: postfix
+	state: started
+	enabled: true
+
+- name: check for always_bcc
+  command: /usr/sbin/postconf always_bcc
+  register: bcc_state
+  ignore_errors: yes
+
+- name: email notific of always_bcc config
+  mail:
+	to: you@site.com
+	subject: 'always_bcc setting is not empty'
+	body: "always_bcc is {{ bcc_state.stdout }}"
+  when: bcc_state.stdout != 'always_bcc ='
+
+  handlers:
+	- name: restart postfix
+	  service:
+		name: postfix
+		state: restarted
+
+---
 Check file contents:
 ansible mysite.com -u devops -b -a "head /etc/postfix/main.cf"
 
